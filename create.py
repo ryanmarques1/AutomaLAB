@@ -50,7 +50,7 @@ def create_afnafd():
             
         elif op_create == 2:
             print("Criando um AFN", end="\n")
-            
+
         elif op_create == 3:
             print("Informe a linguagem a ser reconhecida: ", end="") 
             entrada = input()
@@ -77,5 +77,6 @@ def create_afnafd():
             
                 
         elif op_create == 4:
+            print("Voltando para o menu principal.", end="\n")
             break
         
