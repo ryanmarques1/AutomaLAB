@@ -52,9 +52,30 @@ def create_afnafd():
             print("Criando um AFN", end="\n")
             
         elif op_create == 3:
-            print("Testando linguagens", end="\n")
-            print("Entre com a linguagem que deseja testar: ", end="")
-            input_linguagem = input()
+            print("Informe a linguagem a ser reconhecida: ", end="") 
+            entrada = input()
+            
+            estado_atual = estado_ini
+            
+            for simbolo in entrada:
+                print(f"Estado atual: {estado_atual}")
+                print(f"Entrada atual: {simbolo}")
+                
+                proximo_estado = delta.get((estado_atual, simbolo))
+                
+                if proximo_estado is None:
+                    print("O automato nao reconheceu a linguagem")
+                    break
+            
+                estado_atual = proximo_estado
+                print(f"Proximo estado: {estado_atual}")
+            
+            if estado_atual in estados_finais:
+                print("Reconheceu!")
+            else:
+                print("Nao reconheceu!")
+            
+                
         elif op_create == 4:
             break
         
