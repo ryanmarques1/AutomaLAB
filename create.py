@@ -50,8 +50,7 @@ def create_afnafd():
             
         elif op_create == 2:
             print("Criando um AFN", end="\n")
-            print("Informe os estados: ", end="")
-            
+
         elif op_create == 3:
             print(estado_ini)
             print("Testando linguagens", end="\n")
