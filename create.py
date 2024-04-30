@@ -1,15 +1,17 @@
 def create_afnafd():
+    import os
     estados = []
-    alfabeto = []
-    delta = {}
+    alfabeto = [] # 'a , b , c'
+    delta = {} #Funções de transição dicionarios.
     estado_ini = ""
     estados_finais = []
 
     while 1:
-        print('1. Criar AFD'
-            '2. Criar AFN'
-            '3. Testar linguagens'
-            '4. Sair')
+        print("Menu de opções",end="\n")
+        print('1. Criar AFD',end="\n")
+        print('2. Criar um AFN',end="\n")
+        print('3. Testar linguagem no AFD ou AFN',end="\n")
+        print('4. Sair',end="\n")
         op_create = int(input('Entre com a opcao desejada: '))
         if op_create == 1:
             print("Criando um AFD", end="\n")
@@ -37,42 +39,24 @@ def create_afnafd():
                         delta[(estado, simbolo)] = None 
                     else:
                         delta[(estado, simbolo)] = estado_prox #armazenando o automato
-            return
+
+        #---------------------Armazenando em arquivo o AFD criado em uma pasta generica (para utilizações posteriores)------------#
+            pasta_afd = "AFDs/"
+            if not os.path.exists(pasta_afd):
+                os.mkdir(pasta_afd) #cria a pasta
+            arq_automato = open(pasta_afd + ("automatoAFD_criado.txt"), 'w')# coloca o arquivo dentro da pasta
+            arq_automato.writelines(str(delta)) #converte o dicionario porque metodos referentes a arquivos só aceitam strings.
+            arq_automato.close()
+            
         elif op_create == 2:
             print("Criando um AFN", end="\n")
-
-            print('Informe o conjunto de estados: ', end="")
-            estados = input().split()
-
-            print('Informe a linguagem do automato: ', end="")
-            linguagem = input().split()
-
-            print('Informe o estado inicial: ', end="")
-            estado_ini = input()
-
-            print('Informe o(s) estado(s) finai(s): ', end="")
-            estados_finais = input().split()
+            print("Informe os estados: ", end="")
             
-            return
         elif op_create == 3:
+            print(estado_ini)
             print("Testando linguagens", end="\n")
-            print("Entre com a linguagem a ser testada: ", end="")
-            linguagem_entrada = input()
-            estado_atual = estado_ini
-
-            for simbolo in linguagem_entrada:
-                print(f"Estado atual: {estado_atual}")
-                print(f"Entrada testada: {linguagem_entrada}")
-
-                print(f"Proximo: {delta[(estado_atual,simbolo)]}")
-
-                if estado_atual == None:
-                    print("Error")
-            if estado_atual in estados_finais:
-                print("Deu certo")
-            else:
-                print("Erro")
-            return
-        
-            
+            print("Entre com a linguagem que deseja testar: ", end="")
+            input_linguagem = input()
+        elif op_create == 4:
+            break
         
