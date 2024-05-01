@@ -1,6 +1,6 @@
 def create_afnafd(caracteres_especiais):
+    import base
     import os
-    import pygraphviz as pgv
     estados = []
     alfabeto = [] # 'a , b , c'
     delta = {} #Funções de transição dicionarios.
@@ -47,8 +47,9 @@ def create_afnafd(caracteres_especiais):
                 for simbolo in alfabeto:
                     print(f"\t {simbolo}")
                     print(f"{estado}\t------>\t", end="")
-                    estado_prox = input()
-                    if estado_prox == "" or estado_prox == caracteres_especiais:
+                    estado_prox = input().split()
+                    
+                    if  estado_prox == caracteres_especiais:
                         print("Vazio ou esta com caracteres especiais, retornando ao menu de opções.")
                         return
                     
@@ -57,28 +58,22 @@ def create_afnafd(caracteres_especiais):
                     else:
                         delta[(estado, simbolo)] = estado_prox #armazenando o automato
 
-            Automato = pgv.AGraph(delta)
-            print(Automato)
-
+            
         #---------------------Armazenando em arquivo o AFD criado em uma pasta generica (para utilizações posteriores)------------#
             pasta_afd = "AFDs/"
             if not os.path.exists(pasta_afd):
                 os.mkdir(pasta_afd) #cria a pasta
-            arq_automatoAFD = open(pasta_afd + ("automatoAFD_criado.txt"), 'w')# coloca o arquivo dentro da pasta
-            arq_automatoAFD.writelines(str(delta)) #converte o dicionario porque metodos referentes a arquivos só aceitam strings.
+            arq_automatoAFD = base.armazena_arquivo(pasta_afd, delta)
             arq_automatoAFD.close()
-
             
+            delta_lista = base.dict_lista(delta) #convertendo o dicionario em uma lista de tuplas para plotagem.
             
+            #Plotando
+            AutomatoAFD = base.desenhar_automato(estado_ini,estados_finais,delta_lista)
+            AutomatoAFD.render(pasta_afd + ('automatoAFD'), format='png', cleanup=True) #função cleanup serve para limpar para inserir outro automato.
+            #Plotando
         elif op_create == 2:
             print("Criando um AFN", end="\n")
-            
-            pasta_afn = "AFNs/"
-            if not os.path.exists(pasta_afn):
-                os.mkdir(pasta_afn) #Cria a pasta
-            arq_automatoAFN = open(pasta_afn + ("automatoAFN_criado.txt"), 'w')
-            arq_automatoAFN.writelines(str(delta))
-            arq_automatoAFN.close()
 
         elif op_create == 3:
             print("Informe a linguagem a ser reconhecida: ", end="") 

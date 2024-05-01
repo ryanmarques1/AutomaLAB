@@ -1,29 +1,11 @@
 import create
 import converte
 import minimiza
-import graphviz
-import pygraphviz as pgv
 #Variaveis para controle de acesso indeterminado
-
 caracteres_especiais = "!@#$%&*()-+=<>:;^~.,][}{?/"
-
 #Variaveis para controle de acesso indeterminado
-
-#Teste utilizando graphviz
-
-G = pgv.AGraph()
-G.add_edge("A", "C")
-G.add_edge("B", "C") #Automato
-print(G)
-#Escreve em um arquivo .dot o automato para conversão posterior para imagem
-G.write("teste.dot")
-G.layout()
-G.draw("teste2.png")
-#Teste utilizando graphviz
 
 print('Bem vindo ao Sistema de AFNS e AFDS')
-
-
 while 1:
     print("Menu Principal",end="\n")
     print(" 1. Criar e Testar",end="\n")
