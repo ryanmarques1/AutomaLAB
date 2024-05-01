@@ -1,5 +1,6 @@
 def create_afnafd(caracteres_especiais):
     import os
+    import pygraphviz as pgv
     estados = []
     alfabeto = [] # 'a , b , c'
     delta = {} #Funções de transição dicionarios.
@@ -18,25 +19,25 @@ def create_afnafd(caracteres_especiais):
             print("Criando um AFD", end="\n")
             print('Informe o conjunto de estados: ', end="")
             estados = input().split()
-            if not estados or estados != caracteres_especiais:
+            if estados == caracteres_especiais:
                 print("Vazio ou está com caracteres não permitidos, retornando ao menu de opções.")
                 return
 
             print('Informe a linguagem do automato: ', end="")
             alfabeto = input().split()
-            if not alfabeto or alfabeto != caracteres_especiais:
+            if alfabeto == caracteres_especiais:
                 print("Vazio, retornando ao menu de opções.")
                 return
 
             print('Informe o estado inicial: ', end="")
             estado_ini = input()
-            if estado_ini == "" or estado_ini == caracteres_especiais:
+            if estado_ini == caracteres_especiais:
                 print("Vazio, retornando ao menu de opções.")
                 return
 
             print('Informe o(s) estado(s) finai(s): ', end="")
             estados_finais = input().split()
-            if not estados_finais or estados_finais == caracteres_especiais:
+            if estados_finais == caracteres_especiais:
                 print("Vazio, retornando ao menu de opções.")
                 return
 
@@ -56,6 +57,9 @@ def create_afnafd(caracteres_especiais):
                     else:
                         delta[(estado, simbolo)] = estado_prox #armazenando o automato
 
+            Automato = pgv.AGraph(delta)
+            print(Automato)
+
         #---------------------Armazenando em arquivo o AFD criado em uma pasta generica (para utilizações posteriores)------------#
             pasta_afd = "AFDs/"
             if not os.path.exists(pasta_afd):
@@ -63,6 +67,8 @@ def create_afnafd(caracteres_especiais):
             arq_automatoAFD = open(pasta_afd + ("automatoAFD_criado.txt"), 'w')# coloca o arquivo dentro da pasta
             arq_automatoAFD.writelines(str(delta)) #converte o dicionario porque metodos referentes a arquivos só aceitam strings.
             arq_automatoAFD.close()
+
+            
             
         elif op_create == 2:
             print("Criando um AFN", end="\n")
