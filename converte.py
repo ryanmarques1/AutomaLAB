@@ -1,3 +1,4 @@
 def converte_afnafd():
     import os
-    print("Converte")
+    import base
+    print("Converte AFN -> AFD", end="\n")

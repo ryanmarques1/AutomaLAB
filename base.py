@@ -21,3 +21,11 @@ def dict_lista(dict):
     lista = [(estado_origem, simbolo, estado_destino) for (estado_origem, simbolo), estados_destinos in dict.items() for estado_destino in estados_destinos]
     return lista
 
+def converte_txt_list(pasta):
+    arquivo = open(pasta + ("automatoCriado.txt"), 'r')
+    arq = arquivo.read()
+    for i in arq:
+        delta = eval(arq)
+    delta2 = dict_lista(delta)
+    return delta2
+
