@@ -102,4 +102,3 @@ def create_afnafd(caracteres_especiais):
         elif op_create == 4:
             print("Voltando para o menu principal.", end="\n")
             break
-        
