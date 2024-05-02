@@ -25,7 +25,7 @@ def converte_txt_list(pasta):
     arquivo = open(pasta + ("automatoCriado.txt"), 'r')
     arq = arquivo.read()
     for i in arq:
-        delta = eval(arq)
+        delta = eval(arq) #função eval pega o conteudo do arquivo , se for válido em python é adicionado na variavel delta.
     delta2 = dict_lista(delta)
     return delta2
 
