@@ -74,6 +74,57 @@ def create_afnafd(caracteres_especiais):
             #Plotando
         elif op_create == 2:
             print("Criando um AFN", end="\n")
+            print('Informe o conjunto de estados: ', end="")
+            estados = input().split()
+            if estados == caracteres_especiais:
+                print("Vazio ou está com caracteres não permitidos, retornando ao menu de opções.")
+                return
+
+            print('Informe a linguagem do automato: ', end="")
+            alfabeto = input().split()
+            if alfabeto == caracteres_especiais:
+                print("Vazio, retornando ao menu de opções.")
+                return
+
+            print('Informe o estado inicial: ', end="")
+            estado_ini = input()
+            if estado_ini == caracteres_especiais:
+                print("Vazio, retornando ao menu de opções.")
+                return
+
+            print('Informe o(s) estado(s) finai(s): ', end="")
+            estados_finais = input().split()
+            if estados_finais == caracteres_especiais:
+                print("Vazio, retornando ao menu de opções.")
+                return
+            
+            for estado in estados:
+                for simbolo in alfabeto:
+                    print(f"\t {simbolo}")
+                    print(f"{estado}\t------>\t", end="")
+                    estado_prox = [prox for prox in input().split()] #estado_prox vira uma lista, o for opera em cima da função .split()
+                    
+                    if  estado_prox == caracteres_especiais:
+                        print("Vazio ou esta com caracteres especiais, retornando ao menu de opções.")
+                        return
+                    
+                    if estado_prox == '-': #if para tratar casos onde um estado não atende um simbolo
+                        delta[(estado, simbolo)] = None 
+                    else:
+                        delta[(estado, simbolo)] = estado_prox #armazenando o automato
+            
+            pasta_afn = "AFNs/"
+            if not os.path.exists(pasta_afn):
+                os.mkdir(pasta_afn)
+            arq_automatoAFN = base.armazena_arquivo(pasta_afn, delta)
+            arq_automatoAFN.close()
+
+            delta_novo = base.dict_lista(delta)
+
+            #Plotando
+            AutomatoAFN = base.desenhar_automato(estado_ini, estados_finais, delta_novo)
+            AutomatoAFN.render(pasta_afn + ('automatoAFN'), format='png', cleanup=True)
+            #Plotando
 
         elif op_create == 3:
             print("Informe a linguagem a ser reconhecida: ", end="") 
