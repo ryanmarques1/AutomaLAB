@@ -116,39 +116,39 @@ def create_afnafd(caracteres_especiais):
             pasta_afn = "AFNs/"
             if not os.path.exists(pasta_afn):
                 os.mkdir(pasta_afn)
+                
             arq_automatoAFN = base.armazena_arquivo(pasta_afn, delta)
             arq_automatoAFN.close()
 
             delta_novo = base.dict_lista(delta)
 
-            #Plotando
+            # Plotando
             AutomatoAFN = base.desenhar_automato(estado_ini, estados_finais, delta_novo)
             AutomatoAFN.render(pasta_afn + ('automatoAFN'), format='png', cleanup=True)
-            #Plotando
-
+            # Plotando
+            
         elif op_create == 3:
             print("Informe a linguagem a ser reconhecida: ", end="") 
             entrada = input()
-            
-            estado_atual = estado_ini
+            estados_atuais = [estado_ini]
             
             for simbolo in entrada:
-                print(f"Estado atual: {estado_atual}")
+                print(f"Estados atuais: {estados_atuais}")
+                novos_estados = []
+                
+                for estado_atual in estados_atuais:
+                    prox_estados = delta.get((estado_atual, simbolo), [])
+                    novos_estados.extend(prox_estados)
+                    
+                estados_atuais = novos_estados
+                
                 print(f"Entrada atual: {simbolo}")
-                
-                proximo_estado = delta.get((estado_atual, simbolo))
-                
-                if proximo_estado is None:
-                    print("O automato nao reconheceu a linguagem")
-                    break
+                print(f"Próximos estados: {estados_atuais}")
             
-                estado_atual = proximo_estado
-                print(f"Proximo estado: {estado_atual}")
-            
-            if estado_atual in estados_finais:
+            if any(estado in estados_finais for estado in estados_atuais):
                 print("Reconheceu!")
             else:
-                print("Nao reconheceu!")
+                print("Não reconheceu!")
             
         elif op_create == 4:
             print("Voltando para o menu principal.", end="\n")
