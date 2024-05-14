@@ -7,16 +7,26 @@ def create_afnafd(caracteres_especiais):
     estado_ini = ""
     estados_finais = []
     
+    pasta_afd = "AFDs/"
+    pasta_afn = "AFNs/"
+    #Fazer um script para se caso a pessoa sair e retornar , as variaveis terem seus atributos novamente"
 
+    
+    ##Fazer um script para se caso a pessoa sair e retornar , as variaveis terem seus atributos novamente"
     while 1:
         print("Menu de opções",end="\n")
         print('1. Criar AFD',end="\n")
         print('2. Criar um AFN',end="\n")
         print('3. Testar linguagem no AFD ou AFN',end="\n")
-        print('4. Sair',end="\n")
+        print('4. Sair para o Menu Principal',end="\n")
         op_create = int(input('Entre com a opcao desejada: '))
         if op_create == 1:
+
             print("Criando um AFD", end="\n")
+            
+            if not os.path.exists(pasta_afd):
+                os.mkdir(pasta_afd) #cria a pasta
+            
             print('Informe o conjunto de estados: ', end="")
             estados = input().split()
             if estados == caracteres_especiais:
@@ -60,12 +70,13 @@ def create_afnafd(caracteres_especiais):
 
             
         #---------------------Armazenando em arquivo o AFD criado em uma pasta generica (para utilizações posteriores)------------#
-            pasta_afd = "AFDs/"
-            if not os.path.exists(pasta_afd):
-                os.mkdir(pasta_afd) #cria a pasta
+
             arq_automatoAFD = base.armazena_arquivo(pasta_afd, delta)
             arq_automatoAFD.close()
             
+            arq_infoAFD = base.armazena_informacoes(pasta_afd, estado_ini, estados_finais)
+            arq_infoAFD.close()
+
             delta_lista = base.dict_lista(delta) #convertendo o dicionario em uma lista de tuplas para plotagem.
             
             #Plotando
@@ -74,6 +85,10 @@ def create_afnafd(caracteres_especiais):
             #Plotando
         elif op_create == 2:
             print("Criando um AFN", end="\n")
+            
+            if not os.path.exists(pasta_afn):
+                os.mkdir(pasta_afn)
+
             print('Informe o conjunto de estados: ', end="")
             estados = input().split()
             if estados == caracteres_especiais:
@@ -112,13 +127,12 @@ def create_afnafd(caracteres_especiais):
                         delta[(estado, simbolo)] = None 
                     else:
                         delta[(estado, simbolo)] = estado_prox #armazenando o automato
-            
-            pasta_afn = "AFNs/"
-            if not os.path.exists(pasta_afn):
-                os.mkdir(pasta_afn)
                 
             arq_automatoAFN = base.armazena_arquivo(pasta_afn, delta)
             arq_automatoAFN.close()
+
+            arq_infoAFN = base.armazena_informacoes(pasta_afn, estado_ini, estados_finais)
+            arq_infoAFN.close()
 
             delta_novo = base.dict_lista(delta)
 
@@ -130,11 +144,20 @@ def create_afnafd(caracteres_especiais):
         elif op_create == 3:
             print("Informe a linguagem a ser reconhecida: ", end="") 
             entrada = input()
-            estados_atuais = [estado_ini]
+            print("Deseja testar essa linguagem com o automato AFN ou AFD\n")
+
+            print("a - afd\n")
+            print("b - afn\n")
+            op_auto = input("Digite a opcao desejada: ")
             
-            for simbolo in entrada:
-                print(f"Estados atuais: {estados_atuais}")
-                novos_estados = []
+            if op_auto == 'a':
+                #afd
+                estado_ini, estados_finais = base.push_ini_fini(pasta_afd,estado_ini,estados_finais)
+                delta = base.converte_txt_dict(pasta_afd)
+                estados_atuais = [estado_ini]
+                for simbolo in entrada:
+                    print(f"Estados atuais: {estados_atuais}")
+                    novos_estados = []
                 
                 for estado_atual in estados_atuais:
                     prox_estados = delta.get((estado_atual, simbolo), [])
@@ -145,11 +168,34 @@ def create_afnafd(caracteres_especiais):
                 print(f"Entrada atual: {simbolo}")
                 print(f"Próximos estados: {estados_atuais}")
             
-            if any(estado in estados_finais for estado in estados_atuais):
-                print("Reconheceu!")
-            else:
-                print("Não reconheceu!")
+                if any(estado in estados_finais for estado in estados_atuais):
+                    print("Reconheceu!")
+                else:
+                    print("Não reconheceu!")
+
+            elif op_auto == 'b':
+                #afn
+                estado_ini, estados_finais = base.push_ini_fini(pasta_afn, estado_ini, estados_finais)
+                delta = base.converte_txt_dict(pasta_afn)
+                estados_atuais = [estado_ini]
+                for simbolo in entrada:
+                    print(f"Estados atuais: {estados_atuais}")
+                    novos_estados = []
+                
+                for estado_atual in estados_atuais:
+                    prox_estados = delta.get((estado_atual, simbolo), [])
+                    novos_estados.extend(prox_estados)
+                    
+                estados_atuais = novos_estados
+                
+                print(f"Entrada atual: {simbolo}")
+                print(f"Próximos estados: {estados_atuais}")
             
+                if any(estado in estados_finais for estado in estados_atuais):
+                    print("Reconheceu!")
+                else:
+                    print("Não reconheceu!")
+
         elif op_create == 4:
             print("Voltando para o menu principal.", end="\n")
             break
