@@ -1,20 +1,31 @@
-def minimiza_afd():
+class AFD:
+    def __init__(self, estados, alfabeto, transicoes, estado_inic, estados_finais):
+        self.estados = estados
+        self.alfabeto = alfabeto
+        self.transicoes = transicoes
+        self.estado_inic = estado_inic
+        self.estados_finais = estados_finais
+
+
+def minimiza_afd(afd):
     import os
     import base
     print("Minimiza AFD", end="\n")
-    #Precisamos pegar as funções de transição do afd que ja está armazenado ou que foi criado recentemente.
-    """
-    Acessamos a pasta utilizando a função converte_txt_dict, pegamos o .txt do automato e passa para o dicionario delta
-    depois temos que registrar o estado_ini e estado_finais deste automato
-    utilizando o arquivo info_automato acessamos ele, onde nele ja está pré-registrado
-        1º Linha -> Estado Inicial
-        2º Linha -> Estados Finais
-    e utilizando a função push_ini_fini, pegamos o estado inicial e final do automato.
-    """
-    pasta_afd = "AFDs/"
-    estado_ini = ""
-    estados_finais = []
-    alfabeto = []
-    delta_afd = base.converte_txt_dict(pasta_afd)
-    estado_ini, estados_finais,alfabeto = base.push_ini_fini_alfabeto(pasta_afd,estado_ini,estados_finais,alfabeto)
     
+    # Inicializar as partições
+    
+    particao = [{'0'}, set(afd.estados - {'0'})] #supondo que 0 seja o estado inicial
+    
+    # Refinar as partições até que ocorra alguma mudança nos estados
+    
+    while True:
+        nova_particao = []
+        for grupo in particao:
+            novo_grupo = []
+            for simbolo in afd.alfabeto:
+                proximos_estados = set()
+                for estado in grupo:
+                    proximos_estados.add(afd.transioes.get((estado, simbolo), None))
+                proximos_estados.discard(None)
+
+         
