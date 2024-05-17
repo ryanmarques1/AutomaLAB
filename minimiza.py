@@ -14,7 +14,7 @@ def minimiza_afd(afd):
     
     # Inicializar as partições
     
-    particao = [{'0'}, set(afd.estados - {'0'})] #supondo que 0 seja o estado inicial
+    particao = [{afd.estado_inic}, set(afd.estados - {afd.estado_inic})]
     
     # Refinar as partições até que ocorra alguma mudança nos estados
     
@@ -27,5 +27,16 @@ def minimiza_afd(afd):
                 for estado in grupo:
                     proximos_estados.add(afd.transioes.get((estado, simbolo), None))
                 proximos_estados.discard(None)
+                for sub_grupo in particao:
+                    if proximos_estados <= sub_grupo:
+                        novo_grupo.append(sub_grupo)
+                        break
+            if len(novo_grupo) > 0:
+                nova_particao.extend(novo_grupo)
+            else:
+                nova_particao.append(grupo)
+        if nova_particao == particao:
+            break
+        particao = nova_particao
 
          
