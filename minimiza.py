@@ -14,6 +14,7 @@ def minimiza_afd():
     pasta_afd = "AFDs/"
     estado_ini = ""
     estados_finais = []
+    alfabeto = []
     delta_afd = base.converte_txt_dict(pasta_afd)
-    estado_ini, estados_finais = base.push_ini_fini(pasta_afd,estado_ini,estados_finais)
+    estado_ini, estados_finais,alfabeto = base.push_ini_fini_alfabeto(pasta_afd,estado_ini,estados_finais,alfabeto)
     

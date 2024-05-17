@@ -74,7 +74,7 @@ def create_afnafd(caracteres_especiais):
             arq_automatoAFD = base.armazena_arquivo(pasta_afd, delta)
             arq_automatoAFD.close()
             
-            arq_infoAFD = base.armazena_informacoes(pasta_afd, estado_ini, estados_finais)
+            arq_infoAFD = base.armazena_informacoes(pasta_afd, estado_ini, estados_finais, alfabeto)
             arq_infoAFD.close()
 
             delta_lista = base.dict_lista(delta) #convertendo o dicionario em uma lista de tuplas para plotagem.
@@ -131,7 +131,7 @@ def create_afnafd(caracteres_especiais):
             arq_automatoAFN = base.armazena_arquivo(pasta_afn, delta)
             arq_automatoAFN.close()
 
-            arq_infoAFN = base.armazena_informacoes(pasta_afn, estado_ini, estados_finais)
+            arq_infoAFN = base.armazena_informacoes(pasta_afn, estado_ini, estados_finais, alfabeto)
             arq_infoAFN.close()
 
             delta_novo = base.dict_lista(delta)

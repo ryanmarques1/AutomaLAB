@@ -1,6 +1,7 @@
 def converte_afnafd():
     import os
     import base
+    import sys
     print("Converte AFN -> AFD", end="\n")
     #Precisamos pegar as funções de transição do afd que ja está armazenado ou que foi criado recentemente.
     """
@@ -12,10 +13,18 @@ def converte_afnafd():
     e utilizando a função push_ini_fini, pegamos o estado inicial e final do automato.
     """
     pasta_afn = "AFNs/"
-    pasta_afd = "AFDs/"
     estado_ini = ""
     estados_finais = []
+    alfabeto = []
+    estados_afd = {estado_ini}
+    delta_afd = {}
+
     delta_afn = base.converte_txt_dict(pasta_afn)
-    estado_ini, estados_finais = base.push_ini_fini(pasta_afn,estado_ini,estados_finais)
+    delta_afn = base.dict_lista(delta_afn)
+    estado_ini, estados_finais, alfabeto = base.push_ini_fini_alfabeto(pasta_afn,estado_ini,estados_finais,alfabeto)
+
+    chaves_afn = {ind1[0] for ind1 in delta_afn}
+    
+    print(alfabeto)
     
     

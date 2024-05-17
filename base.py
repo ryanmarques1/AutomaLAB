@@ -19,10 +19,12 @@ def armazena_arquivo(pasta, delta):
     arqAUTOMATO.writelines(str(delta))
     return arqAUTOMATO
 
-def armazena_informacoes(pasta, inicio, final):
+def armazena_informacoes(pasta, inicio, final, alfabeto):
     arqINFOautomato = open(pasta + ('info_automato'), 'w')
     arqINFOautomato.write(inicio + '\n')
     arqINFOautomato.writelines(' '.join(final))
+    arqINFOautomato.write('\n')
+    arqINFOautomato.writelines(' '.join(alfabeto))
     return arqINFOautomato
 
 def dict_lista(dict):
@@ -32,6 +34,7 @@ def dict_lista(dict):
 def converte_txt_dict(pasta):
     arquivo = open(pasta + ("automatoCriado.txt"), 'r')
     arq = arquivo.read()
+    delta = {}
     for i in arq:
         delta = eval(arq) #função eval pega o conteudo do arquivo , se for válido em python é adicionado na variavel delta.
     return delta
@@ -43,12 +46,13 @@ def converte_txt_list(pasta):
         delta = eval(arq) #função eval pega o conteudo do arquivo , se for válido em python é adicionado na variavel delta.
     delta2 = dict_lista(delta)
     return delta2
-def push_ini_fini(pasta,ini,final):
+def push_ini_fini_alfabeto(pasta,ini,final,alfabeto):
     arq = open(pasta + ('info_automato'), 'r')
     linhas_arq = arq.readlines()
     ini = linhas_arq[0].strip()
     final = linhas_arq[1]
-    return ini,final
+    alfabeto = linhas_arq[2]
+    return ini,final,alfabeto
 
 def verifica_existencia():
     time.sleep(1)
