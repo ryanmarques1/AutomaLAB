@@ -7,7 +7,10 @@ def desenhar_automato(estado_inicial, estados_finais, delta):
     automato.attr(rankdir='LR') #LR siginifica da esquerda para direita. entao o automato será criado usando essa regra
     automato.attr('node', shape='circle') #definindo os atributos do node (nós)
     
-    automato.node(estado_inicial, shape='circle', fontsize='19', fontcolor='black') #edefinindo o nó inicial estado inicial receber circulo
+    
+    automato.node('->', shape='none', width='0', heigth='0',label='')
+    automato.edge('->', estado_inicial)
+    
     for estado_final in estados_finais: 
         automato.node(estado_final, shape='doublecircle', fontsize='19', fontcolor='green')#colocando circulo duplo em todos os estados finais.
     for estado_origem, simbolo, estado_destino in delta:

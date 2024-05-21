@@ -23,8 +23,17 @@ def converte_afnafd():
     delta_afn = base.dict_lista(delta_afn)
     estado_ini, estados_finais, alfabeto = base.push_ini_fini_alfabeto(pasta_afn,estado_ini,estados_finais,alfabeto)
 
+    print(delta_afn)
     chaves_afn = {ind1[0] for ind1 in delta_afn}
+    chaves_afn = list(chaves_afn)
+    print(chaves_afn)
+    for i in chaves_afn:
+        novo_estado = ''.join(chaves_afn)
+        estados = chaves_afn + [novo_estado,' ']
+
+    print(estados)
+        
     
-    print(alfabeto)
+    
     
     
