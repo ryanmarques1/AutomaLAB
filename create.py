@@ -152,7 +152,7 @@ def create_afnafd(caracteres_especiais):
             
             if op_auto == 'a':
                 #afd
-                estado_ini, estados_finais = base.push_ini_fini(pasta_afd,estado_ini,estados_finais)
+                estado_ini, estados_finais, alfabeto = base.push_ini_fini_alfabeto(pasta_afd,estado_ini,estados_finais,alfabeto)
                 delta = base.converte_txt_dict(pasta_afd)
                 estados_atuais = [estado_ini]
                 for simbolo in entrada:
@@ -175,7 +175,7 @@ def create_afnafd(caracteres_especiais):
 
             elif op_auto == 'b':
                 #afn
-                estado_ini, estados_finais = base.push_ini_fini(pasta_afn, estado_ini, estados_finais)
+                estado_ini, estados_finais, alfabeto = base.push_ini_fini_alfabeto(pasta_afn, estado_ini, estados_finais, alfabeto)
                 delta = base.converte_txt_dict(pasta_afn)
                 estados_atuais = [estado_ini]
                 for simbolo in entrada:
