@@ -32,8 +32,3 @@ def converte_afnafd():
         estados = chaves_afn + [novo_estado,' ']
 
     print(estados)
-        
-    
-    
-    
-    

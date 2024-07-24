@@ -48,7 +48,8 @@ def converte_txt_list(pasta):
     for i in arq:
         delta = eval(arq) #função eval pega o conteudo do arquivo , se for válido em python é adicionado na variavel delta.
     delta2 = dict_lista(delta)
-    return delta2
+    return 
+
 def push_ini_fini_alfabeto(pasta,ini,final,alfabeto):
     arq = open(pasta + ('info_automato'), 'r')
     linhas_arq = arq.readlines()
@@ -56,6 +57,18 @@ def push_ini_fini_alfabeto(pasta,ini,final,alfabeto):
     final = linhas_arq[1]
     alfabeto = linhas_arq[2]
     return ini,final,alfabeto
+
+def cria_estados(pasta, estados):
+    
+    arq = open(pasta + ('estados.txt'), 'w+')
+    arq.writelines('\n'.join(estados))
+    return arq
+
+def retorna_estados(pasta):
+    arq = open(pasta + ('estados.txt'), 'r')
+    estados = arq.readlines()
+    estados = [item.strip() for item in estados]
+    return estados
 
 def verifica_existencia():
     time.sleep(1)
@@ -67,6 +80,3 @@ def verifica_existencia():
 
     else:
         print("\nNão encontramos(Vazio)... Crie um AFD ou AFN\n")
-
-
-

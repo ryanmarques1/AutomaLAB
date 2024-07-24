@@ -74,11 +74,15 @@ def create_afnafd(caracteres_especiais):
             arq_automatoAFD = base.armazena_arquivo(pasta_afd, delta)
             arq_automatoAFD.close()
             
+            arqEstados = base.cria_estados(pasta_afd, estados)
+            arqEstados.close()
+
             arq_infoAFD = base.armazena_informacoes(pasta_afd, estado_ini, estados_finais, alfabeto)
             arq_infoAFD.close()
 
             delta_lista = base.dict_lista(delta) #convertendo o dicionario em uma lista de tuplas para plotagem.
             
+            print(delta_lista)
             #Plotando
             AutomatoAFD = base.desenhar_automato(estado_ini,estados_finais,delta_lista)
             AutomatoAFD.render(pasta_afd + ('automatoAFD'), format='png', cleanup=True) #função cleanup serve para limpar para inserir outro automato.
@@ -130,7 +134,8 @@ def create_afnafd(caracteres_especiais):
                 
             arq_automatoAFN = base.armazena_arquivo(pasta_afn, delta)
             arq_automatoAFN.close()
-
+            
+            
             arq_infoAFN = base.armazena_informacoes(pasta_afn, estado_ini, estados_finais, alfabeto)
             arq_infoAFN.close()
 
