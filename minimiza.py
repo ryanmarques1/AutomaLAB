@@ -27,6 +27,7 @@ def minimiza_afd():
         for j in range(i):
             matriz_tabela[i][j + 1] = 'X'
             
+                
     print(estados)
     print(tabulate(matriz_tabela, headers='firstrow', tablefmt='fancy_grid'))
     #print(delta_afd)
