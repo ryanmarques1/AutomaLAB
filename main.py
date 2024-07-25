@@ -12,6 +12,8 @@ print("\nVerificando a existência de um AFN e ou AFD criado...\n")
 
 base.verifica_existencia()
 
+afn = None
+
 while 1:
  
     
@@ -25,7 +27,7 @@ while 1:
         create.create_afnafd(caracteres_especiais)
         continue
     elif op == 2:
-        converte.converte_afnafd()
+        converte.afn_para_afd()
         continue
     elif op == 3:
         minimiza.minimiza_afd()
