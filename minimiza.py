@@ -4,7 +4,7 @@ def minimiza_afd():
     from tabulate import tabulate
     print("Minimiza AFD", end="\n")
     pasta_afd = "AFDs/"
-    estado_ini = ""
+    estado_ini = ''
     estados_finais = []
     alfabeto = []
     delta_afd = base.converte_txt_dict(pasta_afd)
@@ -35,13 +35,16 @@ def minimiza_afd():
 
     #Segunda Etapa = Verificação -> ESTADO FINAL X FINAL & ESTADO INICIAL COM INICIAL
     #Se acontecer a colisão de ESTADO INICIAL X FINAL, SERÁ COLOCADO UM 'X' NA TABELA
-
     for i in range(1, len(estados) + 1):
-        for j in range(i):
+        for j in range(1, len(estados) + 1):
             estado1 = matriz_tabela[i][0]  # Estado da linha i
-            estado2 = matriz_tabela[0][j + 1]  # Estado da coluna J + 1
+            estado2 = matriz_tabela[0][j]  # Estado da coluna J
             if (estado1 == estado_ini and estado2 in estados_finais) or (estado2 == estado_ini and estado1 in estados_finais):
-                matriz_tabela[i][j + 1] = 'X'
+                matriz_tabela[i][j] = 'X' 
+
+            
+
+            
 
     print(tabulate(matriz_tabela, headers='firstrow', tablefmt='fancy_grid'))
 

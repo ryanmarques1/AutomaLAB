@@ -2,6 +2,7 @@ import create
 import converte
 import minimiza
 import base
+import os
 #Variaveis para controle de acesso indeterminado
 caracteres_especiais = "!@#$%&*()-+=<>:;^~.,][}{?/"
 #Variaveis para controle de acesso indeterminado
@@ -13,7 +14,15 @@ print("\nVerificando a existência de um AFN e ou AFD criado...\n")
 base.verifica_existencia()
 
 afn = None
+pasta_afd = "AFDs/"
+pasta_afn = "AFNs/"
 
+if not os.path.exists(pasta_afd):
+    
+    os.mkdir(pasta_afd) #cria a pasta
+if not os.path.exists(pasta_afn):
+            
+    os.mkdir(pasta_afn)
 while 1:
  
     
@@ -27,7 +36,7 @@ while 1:
         create.create_afnafd(caracteres_especiais)
         continue
     elif op == 2:
-        converte.afn_para_afd()
+        converte.converte_afn_afd()
         continue
     elif op == 3:
         minimiza.minimiza_afd()

@@ -24,8 +24,7 @@ def create_afnafd(caracteres_especiais):
 
             print("Criando um AFD", end="\n")
             
-            if not os.path.exists(pasta_afd):
-                os.mkdir(pasta_afd) #cria a pasta
+            
             
             print('Informe o conjunto de estados: ', end="")
             estados = input().split()
@@ -90,8 +89,6 @@ def create_afnafd(caracteres_especiais):
         elif op_create == 2:
             print("Criando um AFN", end="\n")
             
-            if not os.path.exists(pasta_afn):
-                os.mkdir(pasta_afn)
 
             print('Informe o conjunto de estados: ', end="")
             estados = input().split()
@@ -135,7 +132,9 @@ def create_afnafd(caracteres_especiais):
             arq_automatoAFN = base.armazena_arquivo(pasta_afn, delta)
             arq_automatoAFN.close()
             
-            
+            arqEstados = base.cria_estados(pasta_afn, estados)
+            arqEstados.close()
+
             arq_infoAFN = base.armazena_informacoes(pasta_afn, estado_ini, estados_finais, alfabeto)
             arq_infoAFN.close()
 
