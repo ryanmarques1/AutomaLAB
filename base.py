@@ -70,6 +70,10 @@ def retorna_estados(pasta):
     estados = [item.strip() for item in estados]
     return estados
 
+def encontrar_estadoequi(estado, combina_estados):
+        while estado in combina_estados and combina_estados[estado] != estado:
+            estado = combina_estados[estado]
+        return estado
 def verifica_existencia():
     time.sleep(1)
     if os.path.exists('AFDs'):

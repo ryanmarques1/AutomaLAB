@@ -1,5 +1,4 @@
 import base
-import os
 from graphviz import Digraph
 def converte_afn_afd():
     pasta_afn = "AFNs/"

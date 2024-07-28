@@ -1,6 +1,5 @@
 def create_afnafd(caracteres_especiais):
     import base
-    import os
     estados = []
     alfabeto = [] # 'a , b , c'
     delta = {} #Funções de transição dicionarios.
