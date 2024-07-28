@@ -3,6 +3,15 @@ import converte
 import minimiza
 import base
 import os
+
+"""
+Equipe:
+
+Ryan Marques de Castro - 7572
+Moisés José Ribeiro - 8108
+Otávio Henrique Lopes Resende - 8132
+
+"""
 #Variaveis para controle de acesso indeterminado
 caracteres_especiais = "!@#$%&*()-+=<>:;^~.,][}{?/"
 #Variaveis para controle de acesso indeterminado
