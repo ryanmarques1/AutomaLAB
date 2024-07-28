@@ -74,13 +74,10 @@ def encontrar_estadoequi(estado, combina_estados):
         while estado in combina_estados and combina_estados[estado] != estado:
             estado = combina_estados[estado]
         return estado
-def verifica_existencia():
+
+def verifica_existencia(pasta):
     time.sleep(1)
-    if os.path.exists('AFDs'):
-        print("\nEncontramos um AFD já criado, você pode já utilizar as funções: testar,converter e minimizar.!!\n")
-
-    if os.path.exists('AFNs'):
-        print("\nEncontramos um AFN já criado, você pode já utilizar as funções: testar,converter e minimizar.!!\n")
-
-    else:
-        print("\nNão encontramos(Vazio)... Crie um AFD ou AFN\n")
+    path = pasta + '/automatoCriado.txt}'
+    if not os.path.isfile(path):
+        print('Não existe automato criado, crie um AFD ou AFN!')
+        

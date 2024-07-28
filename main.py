@@ -20,11 +20,11 @@ print('Bem vindo ao Sistema AUTOLAB', end="\n")
 
 print("\nVerificando a existência de um AFN e ou AFD criado...\n")
 
-base.verifica_existencia()
 
-afn = None
+
 pasta_afd = "AFDs/"
 pasta_afn = "AFNs/"
+
 
 if not os.path.exists(pasta_afd):
     
