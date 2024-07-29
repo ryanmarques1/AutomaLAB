@@ -29,6 +29,7 @@ pasta_afn = "AFNs/"
 if not os.path.exists(pasta_afd):
     
     os.mkdir(pasta_afd) #cria a pasta
+    
 if not os.path.exists(pasta_afn):
             
     os.mkdir(pasta_afn)
