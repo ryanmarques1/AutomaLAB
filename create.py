@@ -61,7 +61,7 @@ def create_afnafd(caracteres_especiais):
                         print("Vazio ou esta com caracteres especiais, retornando ao menu de opções.")
                         return
                     
-                    if estado_prox == '-': #if para tratar casos onde um estado não atende um simbolo
+                    if estado_prox == '': #if para tratar casos onde um estado não atende um simbolo
                         delta[(estado, simbolo)] = None 
                     else:
                         delta[(estado, simbolo)] = estado_prox #armazenando o automato
@@ -123,7 +123,7 @@ def create_afnafd(caracteres_especiais):
                         print("Vazio ou esta com caracteres especiais, retornando ao menu de opções.")
                         return
                     
-                    if estado_prox == '-': #if para tratar casos onde um estado não atende um simbolo
+                    if estado_prox == '': #if para tratar casos onde um estado não atende um simbolo
                         delta[(estado, simbolo)] = None 
                     else:
                         delta[(estado, simbolo)] = estado_prox #armazenando o automato

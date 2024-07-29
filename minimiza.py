@@ -20,11 +20,15 @@ def minimiza_afd():
     novo_delta_afd = {}
     novos_estados = []
 
+
+    print(estados)
     # Inicializar a tabela de minimizacao
     for s1 in estados:
         for s2 in estados:
             if s1 != s2:
-                tabela_minimiza[(s1, s2)] = (s1 in estados_finais) ^ (s2 in estados_finais)
+                tabela_minimiza[(s1, s2)] = (s1 in estados_finais) != (s2 in estados_finais)
+            else:
+                tabela_minimiza[(s1,s2)] = True
     
     #Marcar as estados nao iguais
     while alterado:
@@ -42,33 +46,42 @@ def minimiza_afd():
     
     #Marcar estados
     for (s1, s2), distinto in tabela_minimiza.items():
+        
         if not distinto:
-            combina_estados[s1] = combina_estados.get(s1, s1)
-            combina_estados[s2] = combina_estados.get(s1, s1)
+            
+            combina_estados[s1] = tabela_minimiza.get(s1, s1)
+            combina_estados[s2] = tabela_minimiza.get(s1, s1)
     
     #novos estados finais
-    
+    print(tabela_minimiza)
     for estado in estados_finais:
         novo_estado = combina_estados.get(estado, estado)
-        novos_estados_finais.append(novo_estado)
+        print(novo_estado)
+        if novo_estado not in novos_estados_finais:
+          novos_estados_finais.append(novo_estado) # Problema aqui
+        
+
     
     # gerando novo delta_afd
+    
     
     for (estado, simbolo), destinos in delta_afd.items():
         novo_estado = combina_estados.get(estado, estado)
         novo_destino = combina_estados.get(destinos[0], destinos[0])
         novo_destino_a = "".join(novo_destino)
         novo_delta_afd[(novo_estado, simbolo)] = novo_destino_a
-
+    
     
     for estado in estados:
-        novo_estado = base.encontrar_estadoequi(estado, combina_estados)
-        novos_estados.append(novo_estado)
+        novo_estado = combina_estados.get(estado, estado)
+        print(novo_estado)
+        if novo_estado not in novos_estados:
+            novos_estados.append(novo_estado)
 
+    novo_estado_inicial = combina_estados.get(estado_ini, estado_ini)
     
-    novo_estado_inicial = base.encontrar_estadoequi(estado_ini, combina_estados)
     
-
+    
     automato = Digraph() #Definindo que a var automato é do tipo Digraph()
     automato.attr(rankdir='LR') #LR siginifica da esquerda para direita. entao o automato será criado usando essa regra
     automato.attr('node', shape='circle') #definindo os atributos do node (nós)
@@ -76,6 +89,7 @@ def minimiza_afd():
     automato.node('', shape='none')
     automato.edge('', novo_estado_inicial)
     
+    #print(novo_delta_afd)
     for estado in novos_estados:
         if estado in estados_finais:
             automato.node((estado), shape='doublecircle', fontsize='19', fontcolor='green')

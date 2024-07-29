@@ -31,7 +31,8 @@ def converte_afn_afd():
     while fila:
         estados_atual = fila.pop(0)
 
-        estados_afd.append(estados_atual)
+        if estados_atual not in estados_afd:
+            estados_afd.append(estados_atual)
 
         for simbolo in alfabeto:
             # Conjunto de estados para o próximo estado AFD
@@ -54,8 +55,16 @@ def converte_afn_afd():
         # Verifica se o estado atual é um estado final do AFD
         if any(estado in estados_finais for estado in estados_atual):
             estados_finais_afd.append(estado_a)
+    print(estados_afd)
 
-    # Salva o AFD em um arquivo 
+    # Salva o AFD em um arquivo
+    #estados = list(map(lambda sub: ''.join(sub), estados_afd))
+    estados = [''.join(estado) for estado in estados_afd]
+
+    arq = open(pasta_afd + ('estados.txt'), 'w+')
+    arq.writelines('\n'.join(estados))
+
+    base.armazena_informacoes(pasta_afd, estado_inicial, estados_finais_afd, alfabeto)
     base.armazena_arquivo(pasta_afd, tabela_transicoes_afd)
     print(estados_finais_afd)
     automato = Digraph() #Definindo que a var automato é do tipo Digraph()
