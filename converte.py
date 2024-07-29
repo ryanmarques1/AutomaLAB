@@ -5,7 +5,7 @@ def converte_afn_afd():
     pasta_afn = "AFNs/"
     pasta_afd = "AFDs/"
 
-    res = base.verifica_existencia(pasta_afn)
+   # res = base.verifica_existencia(pasta_afn)
     estado_inicial = None
     estados_finais = set()
     alfabeto = set()

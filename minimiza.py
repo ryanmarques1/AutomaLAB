@@ -7,7 +7,7 @@ def minimiza_afd():
     estados_finais = []
     alfabeto = []
 
-    res = base.verifica_existencia(pasta_afd)
+    #res = base.verifica_existencia(pasta_afd)
     delta_afd = base.converte_txt_dict(pasta_afd)
     estados = base.retorna_estados(pasta_afd)
     estado_ini, estados_finais, alfabeto = base.push_ini_fini_alfabeto(pasta_afd, estado_ini, estados_finais, alfabeto)
