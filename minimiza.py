@@ -9,9 +9,15 @@ def minimiza_afd():
 
     #res = base.verifica_existencia(pasta_afd)
     delta_afd = base.converte_txt_dict(pasta_afd)
+    
+    print(delta_afd)
     estados = base.retorna_estados(pasta_afd)
+    print(estados)
     estado_ini, estados_finais, alfabeto = base.push_ini_fini_alfabeto(pasta_afd, estado_ini, estados_finais, alfabeto)
+    print(estado_ini)
 
+    print(estados_finais)
+    print(alfabeto)
     tabela_minimiza = {}
     alterado = True
     combina_estados = {}
@@ -19,7 +25,6 @@ def minimiza_afd():
     novo_delta_afd = {}
     novos_estados = []
 
-    print(estados)
     # Inicializar a tabela de minimizacao
     for s1 in estados:
         for s2 in estados:
@@ -63,14 +68,20 @@ def minimiza_afd():
             novo_estado = combina_estados.get(estado, estado)
             novo_destino = combina_estados.get(destinos[0], destinos[0])
             novo_delta_afd[(novo_estado, simbolo)] = novo_destino
+            
     
     for estado in estados:
         novo_estado = combina_estados.get(estado, estado)
+        
         if novo_estado not in novos_estados:
             novos_estados.append(novo_estado)
 
     novo_estado_inicial = combina_estados.get(estado_ini, estado_ini)
-
+    
+    print("--------------------------")
+    print(tabela_minimiza)
+    print(novo_delta_afd)
+    
     # Criar o gráfico do autômato minimizado
     automato = Digraph()
     automato.attr(rankdir='LR')

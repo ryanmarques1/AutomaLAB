@@ -7,8 +7,8 @@ def converte_afn_afd():
 
    # res = base.verifica_existencia(pasta_afn)
     estado_inicial = None
-    estados_finais = set()
-    alfabeto = set()
+    estados_finais = []
+    alfabeto = []
     # Carrega a tabela de transições do AFN
     delta_afn = base.converte_txt_dict(pasta_afn)
     
@@ -51,11 +51,10 @@ def converte_afn_afd():
                 estado_a = "".join(estados_atual)
                 estado_p = "".join(proximo_estado)
                 tabela_transicoes_afd[(estado_a, simbolo)] = estado_p
-
         # Verifica se o estado atual é um estado final do AFD
         if any(estado in estados_finais for estado in estados_atual):
             estados_finais_afd.append(estado_a)
-    print(estados_afd)
+    #print(estados_afd)
 
     # Salva o AFD em um arquivo
     #estados = list(map(lambda sub: ''.join(sub), estados_afd))
@@ -63,6 +62,10 @@ def converte_afn_afd():
 
     arq = open(pasta_afd + ('estados.txt'), 'w+')
     arq.writelines('\n'.join(estados))
+
+
+    print(tabela_transicoes_afd)
+    
 
     base.armazena_informacoes(pasta_afd, estado_inicial, estados_finais_afd, alfabeto)
     base.armazena_arquivo(pasta_afd, tabela_transicoes_afd)
@@ -81,3 +84,64 @@ def converte_afn_afd():
             destino = tabela_transicoes_afd[(estado, simbolo)]
             automato.edge(estado,destino,label=simbolo) #edge insere as setas de acordo com o delta, label = simbolo siginica que em cima da seta estará o simbolo.
     automato.render(pasta_afd + ('AutomatoConvertido'), format='png', cleanup=True)
+
+    #Equivalencia
+    print("Deseja testar equivalência do AFN e AFD convertido? S-SIM/N-NÃO")
+    res = input()
+    if res == 'S':
+        print("Digite o tamanho do teste: (Min = 1 Max = 10)\n")
+        tam_equivalencia = int(input())
+        cont = cont2 = cont3 = cont4 = 0
+        for _ in range(tam_equivalencia):
+            aux_alfa = alfabeto
+            entrada = base.gerarEntradaAleatoria(aux_alfa)
+            estados_atuais = [estado_inicial]
+            for simbolo in entrada:
+                    print(f"Estados atuais: {estados_atuais}")
+                    novos_estados = []
+                
+                    for estado_atual in estados_atuais:
+                        prox_estados = delta_afn.get((estado_atual, simbolo), [])
+                        novos_estados.extend(prox_estados)
+                    
+                    estados_atuais = novos_estados
+                
+            print(f"Entrada atual: {simbolo}")
+            print(f"Próximos estados: {estados_atuais}")
+            
+            if any(estado in estados_finais for estado in estados_atuais):
+                cont = cont + 1
+                print("Reconheceu!")
+            else:
+                cont2 = cont2 - 1
+                print("Não reconheceu!")
+            
+            print("/-----------------------------------------------------/")
+            estados_atuais2 = [estado_inicial]
+            for simbolo in entrada:
+                    print(f"Estados atuais: {estados_atuais2}")
+                    novos_estados2 = []
+                
+                    for estado_atual2 in estados_atuais2:
+                        prox_estados2 = tabela_transicoes_afd.get((estado_atual2, simbolo), [])
+                        novos_estados2.extend(prox_estados2)
+                    
+                    estados_atuais2 = novos_estados2
+                
+            print(f"Entrada atual: {simbolo}")
+            print(f"Próximos estados: {estados_atuais2}")
+            
+            if any(estado in estados_finais_afd for estado in estados_atuais2):
+                cont3 = cont3 + 1
+                print("Reconheceu!")
+            else:
+                cont4 = cont4 - 1
+                print("Não reconheceu!")
+        if cont == cont3 or cont2 == cont4:
+            print("\nSão equivalentes\n")
+        else:
+            print("\nNão são")
+
+
+
+

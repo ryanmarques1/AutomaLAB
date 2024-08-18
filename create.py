@@ -162,11 +162,11 @@ def create_afnafd(caracteres_especiais):
                     print(f"Estados atuais: {estados_atuais}")
                     novos_estados = []
                 
-                for estado_atual in estados_atuais:
-                    prox_estados = delta.get((estado_atual, simbolo), [])
-                    novos_estados.extend(prox_estados)
+                    for estado_atual in estados_atuais:
+                        prox_estados = delta.get((estado_atual, simbolo), [])
+                        novos_estados.extend(prox_estados)
                     
-                estados_atuais = novos_estados
+                    estados_atuais = novos_estados
                 
                 print(f"Entrada atual: {simbolo}")
                 print(f"Próximos estados: {estados_atuais}")
@@ -175,21 +175,25 @@ def create_afnafd(caracteres_especiais):
                     print("Reconheceu!")
                 else:
                     print("Não reconheceu!")
-
+            
             elif op_auto == 'b':
                 #afn
                 estado_ini, estados_finais, alfabeto = base.push_ini_fini_alfabeto(pasta_afn, estado_ini, estados_finais, alfabeto)
                 delta = base.converte_txt_dict(pasta_afn)
+
+                print(estado_ini)
+                print(estados_finais)
+                print(delta)
                 estados_atuais = [estado_ini]
                 for simbolo in entrada:
                     print(f"Estados atuais: {estados_atuais}")
                     novos_estados = []
                 
-                for estado_atual in estados_atuais:
-                    prox_estados = delta.get((estado_atual, simbolo), [])
-                    novos_estados.extend(prox_estados)
+                    for estado_atual in estados_atuais:
+                        prox_estados = delta.get((estado_atual, simbolo), [])
+                        novos_estados.extend(prox_estados)
                     
-                estados_atuais = novos_estados
+                    estados_atuais = novos_estados
                 
                 print(f"Entrada atual: {simbolo}")
                 print(f"Próximos estados: {estados_atuais}")
@@ -198,7 +202,7 @@ def create_afnafd(caracteres_especiais):
                     print("Reconheceu!")
                 else:
                     print("Não reconheceu!")
-
+            
         elif op_create == 4:
             print("Voltando para o menu principal.", end="\n")
             break

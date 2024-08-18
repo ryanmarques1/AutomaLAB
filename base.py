@@ -1,6 +1,7 @@
 from graphviz import Digraph
 import os
 import time
+import random
 
 def desenhar_automato(estado_inicial, estados_finais, delta):
     automato = Digraph() #Definindo que a var automato é do tipo Digraph()
@@ -80,4 +81,6 @@ def verifica_existencia(pasta):
     path = pasta + '/automatoCriado.txt}'
     if not os.path.isfile(path):
         print('Não existe automato criado, crie um AFD ou AFN!')
-        
+
+def gerarEntradaAleatoria(alfabeto):
+    return ''.join(random.choice(alfabeto) for _ in range(4))
