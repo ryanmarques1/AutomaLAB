@@ -3,13 +3,14 @@ def minimiza_afd():
     from graphviz import Digraph
     
     pasta_afd = "AFDs/"
+    nome_arq = "automatoMinimizado.txt"
     estado_ini = ''
     estados_finais = []
     alfabeto = []
 
     #res = base.verifica_existencia(pasta_afd)
     delta_afd = base.converte_txt_dict(pasta_afd)
-    
+    #delta_afd = {key: [value] for key, value in delta_afd.items()}
     print(delta_afd)
     estados = base.retorna_estados(pasta_afd)
     print(estados)
@@ -98,3 +99,66 @@ def minimiza_afd():
         automato.edge(estado, destino, label=simbolo)
 
     automato.render(pasta_afd + 'AutomatoMinimizado', format='png', cleanup=True)
+
+
+
+    #Equivalencia
+    aux_alfa = alfabeto.split()
+    novo_delta_afd = {key: [value] for key, value in novo_delta_afd.items()}
+    print("Deseja testar equivalência do AFN e AFD convertido? S-SIM/N-NÃO")
+    res = input()
+    if res == 'S':
+        print("Digite o tamanho do teste: (Min = 1 Max = ATÉ ONDE CONSEGUIR)\n")
+        tam_equivalencia = int(input())
+        cont = cont2 = cont3 = cont4 = 0
+        
+            
+        for _ in range(tam_equivalencia):
+            entrada = base.gerarEntradaAleatoria(aux_alfa)
+            print(entrada)
+            estados_atuais = [estado_ini]
+            for simbolo in entrada:
+                    print(f"Estados atuais: {estados_atuais}")
+                    novos_estados = []
+                
+                    for estado_atual in estados_atuais:
+                        prox_estados = delta_afd.get((estado_atual, simbolo), [])
+                        novos_estados.extend(prox_estados)
+                    
+                    estados_atuais = novos_estados
+                
+            print(f"Entrada atual: {simbolo}")
+            print(f"Próximos estados: {estados_atuais}")
+            
+            if any(estado in estados_finais for estado in estados_atuais):
+                cont = cont + 1
+                print("Reconheceu!")
+            else:
+                cont2 = cont2 - 1
+                print("Não reconheceu!")
+            
+            print("/-----------------------------------------------------/")
+            estados_atuais2 = [novo_estado_inicial]
+            for simbolo in entrada:
+                    print(f"Estados atuais: {estados_atuais2}")
+                    novos_estados2 = []
+                
+                    for estado_atual2 in estados_atuais2:
+                        prox_estados2 = novo_delta_afd.get((estado_atual2, simbolo), [])
+                        novos_estados2.extend(prox_estados2)
+                    
+                    estados_atuais2 = novos_estados2
+                
+            print(f"Entrada atual: {simbolo}")
+            print(f"Próximos estados: {estados_atuais2}")
+            
+            if any(estado in estados_finais for estado in estados_atuais2):
+                cont3 = cont3 + 1
+                print("Reconheceu!")
+            else:
+                cont4 = cont4 - 1
+                print("Não reconheceu!")
+        if cont == cont3 or cont2 == cont4:
+            print("\nSão equivalentes\n")
+        else:
+            print("\nNão são")

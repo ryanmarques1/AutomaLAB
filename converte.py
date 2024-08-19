@@ -4,6 +4,7 @@ from graphviz import Digraph
 def converte_afn_afd():
     pasta_afn = "AFNs/"
     pasta_afd = "AFDs/"
+    nome_arq = "automatoConvertido.txt"
 
    # res = base.verifica_existencia(pasta_afn)
     estado_inicial = None
@@ -69,7 +70,7 @@ def converte_afn_afd():
     #print(tabela_transicoes_afd)
     
     base.armazena_informacoes(pasta_afd, estado_inicial, estados_finais_afd, alfabeto)
-    base.armazena_arquivo(pasta_afd, tabela_transicoes_afd)
+    base.armazena_arquivo(pasta_afd, tabela_transicoes_afd, nome_arq)
     print(estados_finais_afd)
     automato = Digraph() #Definindo que a var automato é do tipo Digraph()
     automato.attr(rankdir='LR') #LR siginifica da esquerda para direita. entao o automato será criado usando essa regra

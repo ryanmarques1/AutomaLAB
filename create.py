@@ -8,6 +8,8 @@ def create_afnafd(caracteres_especiais):
     
     pasta_afd = "AFDs/"
     pasta_afn = "AFNs/"
+
+    nome_arq = 'automatoCriado.txt'
     #Fazer um script para se caso a pessoa sair e retornar , as variaveis terem seus atributos novamente"
 
     
@@ -69,7 +71,7 @@ def create_afnafd(caracteres_especiais):
             
         #---------------------Armazenando em arquivo o AFD criado em uma pasta generica (para utilizações posteriores)------------#
 
-            arq_automatoAFD = base.armazena_arquivo(pasta_afd, delta)
+            arq_automatoAFD = base.armazena_arquivo(pasta_afd, delta, nome_arq)
             arq_automatoAFD.close()
             
             arqEstados = base.cria_estados(pasta_afd, estados)
@@ -128,7 +130,7 @@ def create_afnafd(caracteres_especiais):
                     else:
                         delta[(estado, simbolo)] = estado_prox #armazenando o automato
                 
-            arq_automatoAFN = base.armazena_arquivo(pasta_afn, delta)
+            arq_automatoAFN = base.armazena_arquivo(pasta_afn, delta, nome_arq)
             arq_automatoAFN.close()
             
             arqEstados = base.cria_estados(pasta_afn, estados)

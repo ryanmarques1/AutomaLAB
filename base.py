@@ -18,8 +18,8 @@ def desenhar_automato(estado_inicial, estados_finais, delta):
         automato.edge(estado_origem,estado_destino,label=simbolo) #edge insere as setas de acordo com o delta, label = simbolo siginica que em cima da seta estará o simbolo.
     return automato
 
-def armazena_arquivo(pasta, delta):
-    arqAUTOMATO = open(pasta + ('automatoCriado.txt'), 'w') #teste
+def armazena_arquivo(pasta, delta, nome):
+    arqAUTOMATO = open(pasta + (nome), 'w') #teste
     arqAUTOMATO.writelines(str(delta))
     return arqAUTOMATO
 
