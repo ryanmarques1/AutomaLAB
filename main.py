@@ -1,9 +1,7 @@
 import create
 import converte
 import minimiza
-import base
 import os
-
 """
 Equipe:
 

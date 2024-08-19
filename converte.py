@@ -68,7 +68,6 @@ def converte_afn_afd():
     #print("------------------")
     #print(tabela_transicoes_afd)
     
-
     base.armazena_informacoes(pasta_afd, estado_inicial, estados_finais_afd, alfabeto)
     base.armazena_arquivo(pasta_afd, tabela_transicoes_afd)
     print(estados_finais_afd)
@@ -100,6 +99,7 @@ def converte_afn_afd():
         print("Digite o tamanho do teste: (Min = 1 Max = ATÉ ONDE CONSEGUIR)\n")
         tam_equivalencia = int(input())
         cont = cont2 = cont3 = cont4 = 0
+        
             
         for _ in range(tam_equivalencia):
             entrada = base.gerarEntradaAleatoria(aux_alfa)
