@@ -83,4 +83,4 @@ def verifica_existencia(pasta):
         print('Não existe automato criado, crie um AFD ou AFN!')
 
 def gerarEntradaAleatoria(alfabeto):
-    return ''.join(random.choice(alfabeto) for _ in range(4))
+    return ''.join(random.choice(alfabeto) for _ in range(7))

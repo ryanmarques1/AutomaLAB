@@ -63,8 +63,10 @@ def converte_afn_afd():
     arq = open(pasta_afd + ('estados.txt'), 'w+')
     arq.writelines('\n'.join(estados))
 
-
-    print(tabela_transicoes_afd)
+    
+    #print(delta_afn)
+    #print("------------------")
+    #print(tabela_transicoes_afd)
     
 
     base.armazena_informacoes(pasta_afd, estado_inicial, estados_finais_afd, alfabeto)
@@ -85,16 +87,23 @@ def converte_afn_afd():
             automato.edge(estado,destino,label=simbolo) #edge insere as setas de acordo com o delta, label = simbolo siginica que em cima da seta estará o simbolo.
     automato.render(pasta_afd + ('AutomatoConvertido'), format='png', cleanup=True)
 
+    aux_alfa = alfabeto.split()
+    delta_afd = {key: [value] for key, value in tabela_transicoes_afd.items()} # AQUI eu transformo meu valor da key em uma lista, para adaptar para o codgio de testar linguagem
+
+    #acho que desta forma consigo corrigir outro bug da minimização.
+    
+    print(delta_afd)
     #Equivalencia
     print("Deseja testar equivalência do AFN e AFD convertido? S-SIM/N-NÃO")
     res = input()
     if res == 'S':
-        print("Digite o tamanho do teste: (Min = 1 Max = 10)\n")
+        print("Digite o tamanho do teste: (Min = 1 Max = ATÉ ONDE CONSEGUIR)\n")
         tam_equivalencia = int(input())
         cont = cont2 = cont3 = cont4 = 0
+            
         for _ in range(tam_equivalencia):
-            aux_alfa = alfabeto
             entrada = base.gerarEntradaAleatoria(aux_alfa)
+            print(entrada)
             estados_atuais = [estado_inicial]
             for simbolo in entrada:
                     print(f"Estados atuais: {estados_atuais}")
@@ -123,7 +132,7 @@ def converte_afn_afd():
                     novos_estados2 = []
                 
                     for estado_atual2 in estados_atuais2:
-                        prox_estados2 = tabela_transicoes_afd.get((estado_atual2, simbolo), [])
+                        prox_estados2 = delta_afd.get((estado_atual2, simbolo), [])
                         novos_estados2.extend(prox_estados2)
                     
                     estados_atuais2 = novos_estados2
