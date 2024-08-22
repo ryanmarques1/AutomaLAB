@@ -1,4 +1,3 @@
-# checar_palindromo.py
 from turing_machine import Turing_Machine
 import string
 import sys
@@ -37,9 +36,16 @@ def checar_palindromo(string_inicial):
         maquina.maquina_de_atualizacao(lista_de_caracteres)
         print(maquina.obter_estado(), maquina.cabeca(), maquina.lista())
         passos += 1
+
+    # Remover o marcador de fim de lista (0)
+    lista_final = [x for x in maquina.lista() if x != 0]
+    
     print('----')
     
     if maquina.obter_estado() == 'qy':
         print(f'"{string_inicial}" é um palíndromo! Passos: {passos}')
     else:
         print(f'"{string_inicial}" NÃO é um palíndromo! Passos: {passos}')
+
+entrada = input().strip()
+checar_palindromo(entrada)
