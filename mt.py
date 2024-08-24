@@ -9,12 +9,18 @@ dicionario
 from basemt import MaquinaTuring
 import basemt
 simbolo_vazio = " "
-fita = {} #dict de fitas.
 estado_inicial = ""
 estados_finais = None
 estados_correntes = None
 regras_transicao = None
 entrada_fita = ""
+
+regras_transicao = {}
+estado_atual = ""
+simbolo_atual = ""
+estado_novo = ""
+simbolo_novo = ""
+movimento_cabeca = ""
 
 def maquina_turing():
     """
@@ -27,6 +33,11 @@ def maquina_turing():
 
     print("Digite as regras de transição: ")
     for estado in estados_correntes:
+    regras_transicao = {("q0","a"):("q0", "b", "R"),
+                       ("q0","b"):("q0", "a", "R"),
+                       ("q0","c"):("q1", "b", "R"),
+                       ("q1", "c"):("q0", "a", "R"),
+                       ("q0"," "):("q2"," ", "N")}
     """
     
     print("Entrada: \n")
@@ -36,13 +47,22 @@ def maquina_turing():
     print("Estados finais: \n")
     estados_finais = input().split()
 
-    print("Agora será a hora de digitar")
-
-    regras_transicao = {("q0","a"):("q0", "b", "R"),
-                       ("q0","b"):("q0", "a", "R"),
-                       ("q0","c"):("q1", "b", "R"),
-                       ("q1", "c"):("q0", "a", "R"),
-                       ("q0"," "):("q2"," ", "N")}
+    print("Agora será a hora de digitar as regras de transição da máquina:")
+    print("Seguindo desta forma: [chave] estado, simbolo -> [valor] estado_destino, simbolo_novo, movimento_cabeça")
+    print("Para simbolizar uma transição  -> (' ') vazia dê espaço e aperte enter")
+    
+    print("Digite a quantidade de regras: ")
+    tam_regras = int(input())
+    for i in range(tam_regras):
+        estado_atual = input("Entre com o estado atual: ")
+        simbolo_atual = input("Entre com o simbolo atual: ")
+        estado_novo = input("Entre com o estado novo: ")
+        simbolo_novo = input("Entre com o simbolo novo: ")
+        movimento_cabeca = input("Entre com a direção da cabeça: ")
+        chave = (estado_atual, simbolo_atual)
+        valor = (estado_novo, simbolo_novo, movimento_cabeca)
+        regras_transicao.update({chave: valor})
+    
 
     objMt = MaquinaTuring(entrada_fita, simbolo_vazio=simbolo_vazio, estado_inicial=estado_inicial, 
     estados_finais=estados_finais, regras_transicao=regras_transicao)

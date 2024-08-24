@@ -5,16 +5,6 @@ def inicia_fita(fita_entrada):
 	for i in range(len(fita_entrada)): 
 		fita_ini[i] = fita_entrada[i] #recebendo a fita de entrada e colocando na fita e enumerando.return fita_ini
 	return fita_ini
-"""
-def retorna_simbolo(posi, fita=None): #retorna o simbolo atual na fita, com o parametro index(posição), se não existir é blanksymbol.
-	if posi in fita:
-		return fita[posi]
-	else:
-		return simbolo_vazio
-	
-def recebe_simbolo(posi, simbolo, fita=None):
-	fita[posi] = simbolo
-"""
 
 def tamanho_fita(fita_entrada):
 	aux = ""
