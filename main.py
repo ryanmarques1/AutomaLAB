@@ -1,6 +1,7 @@
 import create
 import converte
 import minimiza
+import mt
 import os
 """
 Equipe:
@@ -38,7 +39,8 @@ while 1:
     print(" 1. Criar e Testar",end="\n")
     print(" 2. Converter um AFN -> AFD",end="\n")
     print(" 3. Minimizar um AFD", end="\n")
-    print(" 4. Sair",end="\n")
+    print(" 4. Operar uma Máquina de Turing", end="\n")
+    print(" 5. Sair",end="\n")
     op = int(input("Entre com a opção desejada: "))
     if op == 1:
         create.create_afnafd(caracteres_especiais)
@@ -50,5 +52,7 @@ while 1:
         minimiza.minimiza_afd()
         continue
     elif op == 4:
+        mt.maquina_turing()
+    elif op == 5:
         print("Fechando... Adeus =D",end="\n")
         break
