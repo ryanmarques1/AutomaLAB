@@ -46,6 +46,7 @@ def maquina_turing():
     estado_inicial = input()
     print("Estados finais: \n")
     estados_finais = input().split()
+    
 
     print("Agora será a hora de digitar as regras de transição da máquina:")
     print("Seguindo desta forma: [chave] estado, simbolo -> [valor] estado_destino, simbolo_novo, movimento_cabeça")

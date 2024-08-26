@@ -54,3 +54,5 @@ class MaquinaTuring(object):
 			elif valor[2] == "L":
 				self.posicao_cabeca -= 1
 		self.estados_correntes = valor[0] #Se não for nem L nem R, mantém.
+
+		#Livre de contexto.
