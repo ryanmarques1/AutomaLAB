@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Menu Principal - AUTOLAB</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+    </style>
+</head>
+<body>
+    <h1>Bem vindo ao Sistema AUTOLAB</h1>
+    <h2>Menu Principal</h2>
+    <div class="menu-container">
+        <form action="{{ url_for('criar_testar') }}" method="get">
+            <button type="submit" class="menu-button">Criar e Testar AFN/AFD</button>
+        </form>
+        <form action="{{ url_for('converter_afn_afd') }}" method="get">
+            <button type="submit" class="menu-button">Converter um AFN -> AFD</button>
+        </form>
+        <form action="{{ url_for('minimizar_afd') }}" method="get">
+            <button type="submit" class="menu-button">Minimizar um AFD</button>
+        </form>
+        <form action="{{ url_for('maquina_turing') }}" method="get">
+            <button type="submit" class="menu-button">Operar uma Máquina de Turing</button>
+        </form>
+        <form action="{{ url_for('sair') }}" method="get">
+            <button type="submit" class="menu-button">Sair</button>
+        </form>
+    </div>
+</body>
+</html>

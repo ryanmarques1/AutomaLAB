@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar e Testar AFN/AFD</title>
+</head>
+<body>
+    <h1>Menu de Opções - Criar e Testar AFN/AFD</h1>
+    <form  method="POST">
+        <input type="button" onclick="location.href='/criar_afd';" value = "Criar AFD" />
+        <input type="button" onclick="location.href='/criar_afn';" value = "Criar AFN" />
+        <input type="button" onclick="location.href='/testar_linguagem';" value = "Testar Linguagem" />
+    </form>
+    <br>
+
+    <a href="{{ url_for('menu') }}">Voltar para o Menu Principal</a>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testar Linguagem</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Testar Linguagem</h1>
+        <form method="post" action="{{ url_for('testar_linguagem') }}">
+            <label for="entrada">Entrada:</label>
+            <input type="text" id="entrada" name="entrada" required><br>
+
+            <label for="automato_tipo">Tipo de Autômato:</label>
+            <select id="automato_tipo" name="automato_tipo" required>
+                <option value="afd">AFD</option>
+                <option value="afn">AFN</option>
+            </select><br>
+
+            <input type="submit" value="Testar Linguagem">
+        </form>
+        <a href="{{ url_for('menu') }}" class="btn btn-primary">Voltar ao Menu</a>
+    </div>
+</body>
+</html>

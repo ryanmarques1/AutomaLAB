@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar AFN</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Criar Autômato Finito Não-Determinístico (AFN)</h1>
+        <form action="/monta_afn" method="POST">
+            <div class="form-group">
+                <label for="estados">Informe o conjunto de estados (separados por espaço):</label>
+                <input type="text" id="estados" name="estados" required>
+            </div>
+            <div class="form-group">
+                <label for="alfabeto">Informe a linguagem do autômato (separado por espaço):</label>
+                <input type="text" id="alfabeto" name="alfabeto" required>
+            </div>
+            <div class="form-group">
+                <label for="estado_ini">Estado Inicial:</label>
+                <input type="text" id="estado_ini" name="estado_ini" required>
+            </div>
+            <div class="form-group">
+                <label for="estados_finais">Estados Finais (separados por espaço):</label>
+                <input type="text" id="estados_finais" name="estados_finais" required>
+            </div>
+            <div class="form-group">
+                <h3>Transições</h3>
+                <p>Insira as transições para cada estado e símbolo do alfabeto. Exemplo: q0 com símbolo 'a' vai para q1.</p>
+                <div id="transicoes">
+                    <!-- Este espaço será preenchido dinamicamente com base nos estados e alfabeto -->
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Criar AFN</button>
+        </form>
+        <a href="{{ url_for('menu') }}" class="btn btn-secondary">Voltar ao Menu</a>
+    </div>
+
+    <script>
+        // Script para adicionar campos de transição dinamicamente
+        document.addEventListener('DOMContentLoaded', function () {
+            const estadosInput = document.getElementById('estados');
+            const alfabetoInput = document.getElementById('alfabeto');
+            const transicoesDiv = document.getElementById('transicoes');
+
+            function criarCamposTransicoes() {
+                const estados = estadosInput.value.split(' ');
+                const alfabeto = alfabetoInput.value.split(' ');
+                transicoesDiv.innerHTML = '';
+
+                estados.forEach(estado => {
+                    alfabeto.forEach(simbolo => {
+                        const label = document.createElement('label');
+                        label.textContent = `Transição de ${estado} com símbolo '${simbolo}': `;
+                        const input = document.createElement('input');
+                        input.type = 'text';
+                        input.name = `trans_${estado}_${simbolo}`;
+                        input.placeholder = 'Estados de destino (separados por espaço)';
+                        transicoesDiv.appendChild(label);
+                        transicoesDiv.appendChild(input);
+                        transicoesDiv.appendChild(document.createElement('br'));
+                    });
+                });
+            }
+
+            estadosInput.addEventListener('input', criarCamposTransicoes);
+            alfabetoInput.addEventListener('input', criarCamposTransicoes);
+        });
+    </script>
+</body>
+</html>
