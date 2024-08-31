@@ -68,9 +68,10 @@ def converte_afn_afd():
     #print("------------------")
     #print(tabela_transicoes_afd)
     
+    
     base.armazena_informacoes(pasta_afd, estado_inicial, estados_finais_afd, alfabeto)
+    
     base.armazena_arquivo(pasta_afd, tabela_transicoes_afd)
-    print(estados_finais_afd)
     automato = Digraph() #Definindo que a var automato é do tipo Digraph()
     automato.attr(rankdir='LR') #LR siginifica da esquerda para direita. entao o automato será criado usando essa regra
     automato.attr('node', shape='circle') #definindo os atributos do node (nós)
@@ -146,7 +147,7 @@ def converte_afn_afd():
             else:
                 cont4 = cont4 - 1
                 print("Não reconheceu!")
-        if cont == cont3 or cont2 == cont4:
+        if cont == cont3 and cont2 == cont4:
             print("\nSão equivalentes\n")
         else:
             print("\nNão são")

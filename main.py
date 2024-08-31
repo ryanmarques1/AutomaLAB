@@ -15,7 +15,7 @@ Otávio Henrique Lopes Resende - 8132
 caracteres_especiais = "!@#$%&*()-+=<>:;^~.,][}{?/"
 #Variaveis para controle de acesso indeterminado
 
-print('Bem vindo ao Sistema AUTOLAB', end="\n")
+print('Bem vindo ao Sistema AUTOMALAB', end="\n")
 
 print("\nVerificando a existência de um AFN e ou AFD criado...\n")
 

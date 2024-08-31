@@ -33,8 +33,8 @@ class MaquinaTuring(object):
 		else:
 			self.regras_transicao = regras_transicao
 	
-	def retorna_fita(self): #retorna a fita.
-		return str(self.fita)
+	def retorna_fita(self): #retorna a fita convertida pq ela é um dicionario
+		return str(self.fita) 
 	
 	def eh_final(self):
 		if self.estados_correntes in self.estados_finais:
@@ -53,6 +53,6 @@ class MaquinaTuring(object):
 				self.posicao_cabeca += 1
 			elif valor[2] == "L":
 				self.posicao_cabeca -= 1
-		self.estados_correntes = valor[0] #Se não for nem L nem R, mantém.
+			self.estados_correntes = valor[0] #Se não for nem L nem R, mantém.
 
 		#Livre de contexto.

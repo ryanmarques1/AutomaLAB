@@ -58,7 +58,7 @@ def create_afnafd(caracteres_especiais):
                     estado_prox = input().split()
                     
                     if  estado_prox == caracteres_especiais:
-                        print("Vazio ou esta com caracteres especiais, retornando ao menu de opções.")
+                        print("Vazio ou esta com caracteres especiais ou não está na lista de estados, retornando ao menu de opções.")
                         return
                     
                     if estado_prox == '': #if para tratar casos onde um estado não atende um simbolo

@@ -26,7 +26,7 @@ def armazena_arquivo(pasta, delta):
 def armazena_informacoes(pasta, inicio, final, alfabeto):
     arqINFOautomato = open(pasta + ('info_automato'), 'w')
     arqINFOautomato.write(inicio + '\n')
-    arqINFOautomato.writelines(' '.join(final))
+    arqINFOautomato.write(str(final))
     arqINFOautomato.write('\n')
     arqINFOautomato.writelines(' '.join(alfabeto))
     return arqINFOautomato
@@ -83,4 +83,4 @@ def verifica_existencia(pasta):
         print('Não existe automato criado, crie um AFD ou AFN!')
 
 def gerarEntradaAleatoria(alfabeto):
-    return ''.join(random.choice(alfabeto) for _ in range(7))
+    return ''.join(random.choice(alfabeto) for _ in range(15))
