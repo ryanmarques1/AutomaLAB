@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Converter AFN para AFD</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>Conversão de AFN para AFD</h1>
+    </header>
+    <main>
+        <section>
+            <p>Clique no botão abaixo para converter um autômato finito não determinístico (AFN) em um autômato finito determinístico (AFD).</p>
+            <form action="/converter_afn_afd" method="post">
+                <button type="submit">Converter AFN -> AFD</button>
+            </form>
+        </section>
+        <section>
+            <a href="{{ url_for('menu') }}">Voltar para o Menu Principal</a>
+        </section>
+    </main>
+</body>
+</html>
