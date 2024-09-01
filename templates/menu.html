@@ -2,14 +2,13 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Menu Principal - AUTOLAB</title>
+    <title>Menu Principal - AUTOMALAB</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
     </style>
 </head>
 <body>
     <h1>Bem vindo ao Sistema AUTOLAB</h1>
-    <h2>Menu Principal</h2>
     <div class="menu-container">
         <form action="{{ url_for('criar_testar') }}" method="get">
             <button type="submit" class="menu-button">Criar e Testar AFN/AFD</button>
