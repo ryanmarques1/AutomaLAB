@@ -1,4 +1,4 @@
-simbolo_vazio = " "
+simbolo_vazio = ' '
 fita = {}
 def inicia_fita(fita_entrada):
 	fita_ini = {}
@@ -7,7 +7,7 @@ def inicia_fita(fita_entrada):
 	return fita_ini
 
 def tamanho_fita(fita_entrada):
-	aux = ""
+	aux = ''
 	#pegar o tam inicial e final da fita.
 	inicio = len(fita_entrada[0])
 	for i in range(len(fita_entrada) + 1):
@@ -17,7 +17,7 @@ def tamanho_fita(fita_entrada):
 	return aux
 
 class MaquinaTuring(object):
-	def __init__(self, fita="", simbolo_vazio=" ", estado_inicial = "", estados_finais = None,
+	def __init__(self, fita="", simbolo_vazio=' ', estado_inicial = "", estados_finais = None,
 	regras_transicao = None): #construtor
 		
 		self.fita = inicia_fita(fita) 
@@ -43,7 +43,6 @@ class MaquinaTuring(object):
 			return False
 
 	def maquina_atualizando(self): #Aplicações das regras.
-		print("attt\n")
 		simbolo_atual_cabeça = self.fita.get(self.posicao_cabeca, self.simbolo_vazio) #get para se caso não existir a posição ler o simbolo vazio
 		chave = (self.estados_correntes, simbolo_atual_cabeça)
 		if chave in self.regras_transicao:

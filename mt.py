@@ -8,7 +8,7 @@ dicionario
 """
 from basemt import MaquinaTuring
 import basemt
-simbolo_vazio = " "
+simbolo_vazio = ' '
 estado_inicial = ""
 estados_finais = None
 estados_correntes = None
@@ -79,14 +79,11 @@ def maquina_turing():
     estados_finais=estados_finais, regras_transicao=regras_transicao)
 
     print("Entrada na fita: \n" + objMt.retorna_fita())
-    while 1: ##Imitar um PC.
+    while not objMt.eh_final(): ##Imitar um PC.
         try:
-            if not objMt.eh_final():
-                objMt.maquina_atualizando()
-            else:
-                break
+            objMt.maquina_atualizando()
         except ValueError:
-            print("TELAA AZULLLL \n")
+            print("Error \n")
 
     print("Operação realizada com sucesso, abaixo está a saída.\n")
     print("Resultado da fita: \n" + objMt.retorna_fita())
