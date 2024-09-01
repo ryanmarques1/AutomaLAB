@@ -11,16 +11,16 @@
     <h1>Bem vindo ao Sistema AUTOLAB</h1>
     <div class="menu-container">
         <form action="{{ url_for('criar_testar') }}" method="get">
-            <button type="submit" class="menu-button">Criar e Testar AFN/AFD</button>
+            <input type="button" onclick="location.href='/criar_testar';" value = "Criar e Testar" />
         </form>
         <form action="{{ url_for('converter_afn_afd') }}" method="get">
-            <button type="submit" class="menu-button">Converter um AFN -> AFD</button>
+            <input type="button" onclick="location.href='/converter_afn_afd';" value = "Converter AFN -> AFD" />
         </form>
         <form action="{{ url_for('minimizar_afd') }}" method="get">
-            <button type="submit" class="menu-button">Minimizar um AFD</button>
+            <input type="button" onclick="location.href='/minimizar_afd';" value = "Minimizar AFD" />
         </form>
         <form action="{{ url_for('maquina_turing') }}" method="get">
-            <button type="submit" class="menu-button">Operar uma Máquina de Turing</button>
+            <input type="button" onclick="location.href='maquina_turing';" value = "Operar Máquina de Turing" />
         </form>
         <form action="{{ url_for('sair') }}" method="get">
             <button type="submit" class="menu-button">Sair</button>
