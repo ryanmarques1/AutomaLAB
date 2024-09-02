@@ -273,13 +273,18 @@ def render_maquina_turing():
 
 @app.route('/mt', methods = ['POST'])
 def maquina_turing():
-    fita = request.form['fita'].replace(' ', '')
+    fita = request.form['fita'].strip().split()
     simbolosextras = request.form['simbolos_extras'].split(' ')
     estados = request.form['estados'].split(' ')
     estado_inicial = request.form['estado_ini']
-    estados_aceitacao = set(('estados_aceitacao').split(' '))
+    estados_aceitacao = request.form['estados_aceitacao'].split(' ')
     transicoes = {}
-
+    print(fita)
+    print(simbolosextras)   
+    print(estados)
+    print(estado_inicial)
+    print(estados_aceitacao)
+    print(transicoes)
     for estado in estados:
         for simbolo in fita:
             chave_transicao = f'trans_{estado}_{simbolo}'
@@ -307,6 +312,8 @@ def maquina_turing():
 
     while not tm.eh_final(): ##Imitar um PC.
         tm.maquina_atualizando()
+        if tm.eh_final() == True:
+            break
        
 
     res = tm.retorna_fita()

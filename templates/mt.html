@@ -55,9 +55,10 @@
         document.getElementById('estados').addEventListener('input', updateTransicoes);
         document.getElementById('fita').addEventListener('input', updateTransicoes);
         document.getElementById('simbolos_extras').addEventListener('input', updateTransicoes); // Corrigido o id
-
+        document.getElementById('estados_aceitacao').addEventListener('input', updateTransicoes); // Corrigido o id
         function updateTransicoes() {
             const estados = document.getElementById('estados').value.trim().split(' ').filter(Boolean);
+            const estados_aceitacao = document.getElementById('estados_aceitacao').value.trim().split(' ').filter(Boolean) // Corrigido o id
             const fita = document.getElementById('fita').value.trim().split(' ').filter(Boolean);
             const simbolos_extras = document.getElementById('simbolos_extras').value.trim().split(' ').filter(Boolean); // Corrigido o id
             const simbolos = [...new Set([...fita, ...simbolos_extras])];  // Combina fita e símbolos extras
