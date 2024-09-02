@@ -2,8 +2,8 @@ import base
 
 from graphviz import Digraph
 def converte_afn_afd():
-    pasta_afn = "AFNs/"
-    pasta_afd = "AFDs/"
+    pasta_afn = "static/AFNs/"
+    pasta_afd = "static/AFDs/"
 
    # res = base.verifica_existencia(pasta_afn)
     estado_inicial = None

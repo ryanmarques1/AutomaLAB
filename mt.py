@@ -122,4 +122,3 @@ def maquina_turing():
 """
 
 
-

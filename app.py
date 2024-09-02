@@ -14,8 +14,8 @@ caracteres_especiais = "!@#$%&*()-+=<>:;^~.,][}{?/"
 
 # Função para verificar e criar pastas se não existirem
 def verifica_pastas():
-    pasta_afd = "AFDs/"
-    pasta_afn = "AFNs/"
+    pasta_afd = "static/AFDs/"
+    pasta_afn = "static/AFNs/"
     if not os.path.exists(pasta_afd):
         os.mkdir(pasta_afd)
     if not os.path.exists(pasta_afn):
@@ -28,7 +28,7 @@ def menu():
     return render_template('menu.html')
 
 # Rota para criar e testar AFNs e AFDs
-@app.route('/criar_testar', methods=['GEt'])
+@app.route('/criar_testar', methods=['GET'])
 def criar_testar():
     """
     if request.method == 'POST':
@@ -143,16 +143,18 @@ def criarafn():
             delta = {}
             estado_ini = request.form['estado_ini']
             estados_finais = request.form['estados_finais'].split(' ')
-
+                    
             for estado in estados:
                 for simbolo in alfabeto:
                     chave_transicao = f'trans_{estado}_{simbolo}'
                     print(f'Chave de transição: {chave_transicao}')
                     estado_destino = request.form.get(chave_transicao)
-                    if estado_destino:  # Verifica se há um estado de destino válido
+                    if estado_destino != '':  # Verifica se há um estado de destino válido
                         delta[(estado, simbolo)] = estado_destino.split(' ')
                     else:
                         delta[(estado, simbolo)] = None
+
+                    
 
 
             arq_automatoAFD = base.armazena_arquivo(pasta_afn, delta)
@@ -165,7 +167,7 @@ def criarafn():
             arq_infoAFD.close()
 
             print(delta)
-            delta_lista = base.dict_lista(delta) #convertendo o dicionario em uma lista de tuplas para plotagem.
+            delta_lista = base.dict_listafront(delta) #convertendo o dicionario em uma lista de tuplas para plotagem.
                 
             print(delta_lista)
 
@@ -240,41 +242,57 @@ def testar_linguagem():
 
     return render_template('testar_linguagem.html')
     
-
-# Rota para converter AFN para AFD
-@app.route('/converter_afn_afd')
+@app.route('/converter_afn_afd', methods=['GET'])
 def converter_afn_afd():
-    try:
-        converte.converte_afn_afd()
-        image_path = 'AFDs/AutomatoConvertido.png'
-        return render_template('mostrar_conversao.html', image_path=image_path, title='AFN para AFD Convertido')
+    #diretorio = 'static/AFDs'
+    #afds = lista_arquivos(diretorio)
+    converte.converte_afn_afd()
+    return redirect(url_for('mostrar_imagemConvertido'))
 
-    except Exception as e:
-        flash(f'Erro ao converter AFN para AFD: {e}')
-        return redirect(url_for('menu'))
+@app.route('/mostrar_imagemConvertido')
+def mostrar_imagemConvertido():
+    imagem_url = url_for('static', filename='AFDs/automatoConvertido.png')
+    return render_template('imagem.html', caminho=imagem_url)
 
-# Rota para minimizar AFD
-@app.route('/minimizar_afd', methods=['GET', 'POST'])
-def minimizar_afd():
+"""
+@app.route('/converte_afn_afd', methods=['POST'])
+def converter_afn_afd():
     if request.method == 'POST':
         try:
-            minimiza.minimiza_afd()
-            image_path = 'AFDs/AutomatoMinimizado.png'
-            return render_template('mostrar_resultado.html', image_path=image_path, title='AFD Minimizado')
-
+            converte.converte_afn_afd()
+            imagem_url = url_for('static', filename='AFDs/AutomatoConvertido.png')
+            return render_template('converter_afn_afd.html', caminho=imagem_url)
+        
         except Exception as e:
-            flash(f'Erro ao minimizar o AFD: {e}')
-            return redirect(url_for('minimizar_afd'))
+            flash(f'Erro ao converter AFN para AFD: {e}')
+            return redirect(url_for('menu'))
+        
+    return render_template('mostrarImagemConvertido')
 
-    return render_template('minimizar_afd.html')   
+@app.route('/mostrarImagemConvertido')
+def mostrar_imagemConvertido():
+    imagem_url = url_for('static', filename='AFDs/automatoConvertido.png')
+    return render_template('imagem.html', caminho=imagem_url)
+"""
 
-# Rota para operar uma Máquina de Turing
+@app.route('/minimizar_afd', methods=['GET'])
+def minimizar_afd():
+    minimiza.minimiza_afd()
+    return redirect(url_for('mostrar_imagemMinimizado'))
+
+@app.route('/mostrar_imagemMinimizado')
+def mostrar_imagemMinimizado():
+    imagem_url = url_for('static', filename='AFDs/AutomatoMinimizado.png')
+    return render_template('imagem.html', caminho=imagem_url)
+      
+
+
 @app.route('/maquina_turing')
 def maquina_turing():
     mt.maquina_turing()
     return redirect(url_for('menu'))
 
-# Rota para sair do sistema
+
 @app.route('/sair')
 def sair():
     return "Fechando... Adeus =D"
@@ -283,14 +301,11 @@ def sair():
 def processar_opcao():
     opcao = request.form.get('opcao')
 
-    if opcao == 'criar_afd':
-        # Chama a função do create.py para criar AFD
-        create.create_afnafd(caracteres_especiais)  # Supondo que esta função já cuida da lógica interna.
+    if opcao == 'criar_afd':  
+        create.create_afnafd(caracteres_especiais)
     elif opcao == 'criar_afn':
-        # Chama a função do create.py para criar AFN
         create.create_afnafd(caracteres_especiais)
     elif opcao == 'testar_linguagem':
-        # Adicione lógica específica para testar linguagens se necessário
         create.create_afnafd(caracteres_especiais)
     return redirect(url_for('menu'))
 

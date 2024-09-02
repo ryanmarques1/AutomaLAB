@@ -35,6 +35,16 @@ def dict_lista(dict):
     lista = [(estado_origem, simbolo, estado_destino) for (estado_origem, simbolo), estados_destinos in dict.items() for estado_destino in estados_destinos]
     return lista
 
+def dict_listafront(delta):
+    lista = []
+    for (estado_origem, simbolo), estados_destinos in delta.items():
+        if estados_destinos is not None:
+            for estado_destino in estados_destinos:
+                lista.append((estado_origem, simbolo, estado_destino))
+        #else:
+           # lista.append((estado_origem, simbolo, estado_origem)) # caso não haja destino, o estado de origem é adicionado novamente
+    return lista
+
 def converte_txt_dict(pasta):
     arquivo = open(pasta + ("automatoCriado.txt"), 'r')
     arq = arquivo.read()

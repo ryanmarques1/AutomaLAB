@@ -2,7 +2,7 @@ def minimiza_afd():
     import base
     from graphviz import Digraph
     
-    pasta_afd = "AFDs/"
+    pasta_afd = "static/AFDs/"
     estado_ini = ''
     estados_finais = []
     alfabeto = []

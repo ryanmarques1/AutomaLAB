@@ -6,8 +6,8 @@ def create_afnafd(caracteres_especiais):
     estado_ini = ""
     estados_finais = []
     
-    pasta_afd = "AFDs/"
-    pasta_afn = "AFNs/"
+    pasta_afd = "static/AFDs/"
+    pasta_afn = "static/AFNs/"
     #Fazer um script para se caso a pessoa sair e retornar , as variaveis terem seus atributos novamente"
 
     
