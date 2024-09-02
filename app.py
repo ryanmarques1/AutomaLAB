@@ -300,11 +300,17 @@ def maquina_turing():
                         transicoes[(estado, simbolo)] = (estado_destino, simbolo_escrever, direcao)
 
     tm = basemt.MaquinaTuring(fita = fita,
+                              simbolo_vazio = '_',
                               estado_inicial = estado_inicial,
                               estados_finais = estados_aceitacao,
                               regras_transicao = transicoes)
 
+    while not tm.eh_final(): ##Imitar um PC.
+        tm.maquina_atualizando()
+       
+
     res = tm.retorna_fita()
+
 
     return render_template('resultado_turing.html', resultado = res)
 
