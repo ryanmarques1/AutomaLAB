@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maquina Turing</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Criar maquina</h1>
+        <form action="/maquina_turing" method="POST">
+            <div class="form-group">
+                <label for="fita">Informe a fita:</label>
+                <input type="text" id="fita" name="fita" required>
+            </div>
+            <div class="form-group">
+                <label for="estado_ini">Estado Inicial:</label>
+                <input type="text" id="estado_ini" name="estado_ini" required>
+            </div>
+            <div class="form-group">
+                <label for="estados_finais">Estados Finais (separados por espaço):</label>
+                <input type="text" id="estados_finais" name="estados_finais" required>
+            </div>
+            <div class="form-group">
+                <h3>Regras de Transições da Máquina de Turing</h3>
+                <p>Agora será a hora de digitar as regras de transição da máquina:</p>
+                <p>Seguindo desta forma: [chave] estado, simbolo -> [valor] estado_destino, simbolo_novo, movimento_cabeça</p>
+                <p>Para simbolizar uma transição  -> (' ') vazia dê espaço e aperte enter</p>
+                <div id="transicoes">
+                    <div class="form-group">
+                        <label for="estado_atual">Informe a estado atual:</label>
+                        <input type="text" id="estado_atual" name="estado_atual" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="simbolo_atual">Informe o simbolo atual:</label>
+                        <input type="text" id="simbolo_atual" name="simbolo_atual" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="novo_estado">Informe o novo estado:</label>
+                        <input type="text" id="novo_estado" name="novo_estado" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="novo_simbolo">Informe o novo simbolo:</label>
+                        <input type="text" id="novo_simbolo" name="novo_simbolo" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="movimento">Informe o movimento da cabeça:</label>
+                        <input type="text" id="movimento" name="movimento" required>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Criar Máquina</button>
+        </form>
+        <a href="{{ url_for('menu') }}" class="btn btn-secondary">Voltar ao Menu</a>
+    </div>
+
+</body>
+</html>

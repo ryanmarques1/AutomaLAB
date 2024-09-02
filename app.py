@@ -287,7 +287,7 @@ def mostrar_imagemMinimizado():
       
 
 
-@app.route('/maquina_turing')
+@app.route('/maquina_turing', methods=['POST'])
 def maquina_turing():
     mt.maquina_turing()
     return redirect(url_for('menu'))
