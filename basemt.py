@@ -1,4 +1,4 @@
-simbolo_vazio = ' '
+simbolo_vazio = '_'
 fita = {}
 def inicia_fita(fita_entrada):
 	fita_ini = {}
@@ -17,7 +17,7 @@ def tamanho_fita(fita_entrada):
 	return aux
 
 class MaquinaTuring(object):
-	def __init__(self, fita="", simbolo_vazio=' ', estado_inicial = "", estados_finais = None,
+	def __init__(self, fita="", simbolo_vazio='_', estado_inicial = "", estados_finais = None,
 	regras_transicao = None): #construtor
 		
 		self.fita = inicia_fita(fita) 

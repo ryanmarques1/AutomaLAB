@@ -8,7 +8,7 @@ dicionario
 """
 from basemt import MaquinaTuring
 import basemt
-simbolo_vazio = ' '
+simbolo_vazio = '_'
 estado_inicial = ""
 estados_finais = None
 estados_correntes = None
@@ -49,26 +49,29 @@ def maquina_turing():
     
     
     print("Entrada: \n")
-    entrada_fita = input()
+    entrada_fita = input() # String
     print("Estado inicial: \n")
-    estado_inicial = input()
+    estado_inicial = input() # String
     print("Estados finais: \n")
-    estados_finais = input().split()
+    estados_finais = input().split() #Lista separado por espaço
     
+
+
+    #Se a maquina entrar em loop a fita de entrada está errada ou alguma regra que vc digitou está errado.
 
     print("Agora será a hora de digitar as regras de transição da máquina:")
     print("Seguindo desta forma: [chave] estado, simbolo -> [valor] estado_destino, simbolo_novo, movimento_cabeça")
-    print("Para simbolizar uma transição  -> (' ') vazia dê espaço e aperte enter")
+    print("Para simbolizar uma transição  -> ('_') vazia dê espaço e aperte enter")
     
    
     print("Digite a quantidade de regras: ")
     tam_regras = int(input())
     for i in range(tam_regras):
-        estado_atual = input("Entre com o estado atual: ")
-        simbolo_atual = input("Entre com o simbolo atual: ")
-        estado_novo = input("Entre com o estado novo: ")
-        simbolo_novo = input("Entre com o simbolo novo: ")
-        movimento_cabeca = input("Entre com a direção da cabeça: ")
+        estado_atual = input("Entre com o estado atual: ") #String
+        simbolo_atual = input("Entre com o simbolo atual: ") #String
+        estado_novo = input("Entre com o estado novo: ") #String
+        simbolo_novo = input("Entre com o simbolo novo: ") #String
+        movimento_cabeca = input("Entre com a direção da cabeça: ") #String R OU L
         chave = (estado_atual, simbolo_atual)
         valor = (estado_novo, simbolo_novo, movimento_cabeca)
         regras_transicao.update({chave: valor})

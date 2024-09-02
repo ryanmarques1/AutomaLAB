@@ -3,6 +3,7 @@ import create
 import converte
 import minimiza
 import mt
+import basemt
 import os
 import base
 
@@ -254,26 +255,6 @@ def mostrar_imagemConvertido():
     imagem_url = url_for('static', filename='AFDs/automatoConvertido.png')
     return render_template('imagem.html', caminho=imagem_url)
 
-"""
-@app.route('/converte_afn_afd', methods=['POST'])
-def converter_afn_afd():
-    if request.method == 'POST':
-        try:
-            converte.converte_afn_afd()
-            imagem_url = url_for('static', filename='AFDs/AutomatoConvertido.png')
-            return render_template('converter_afn_afd.html', caminho=imagem_url)
-        
-        except Exception as e:
-            flash(f'Erro ao converter AFN para AFD: {e}')
-            return redirect(url_for('menu'))
-        
-    return render_template('mostrarImagemConvertido')
-
-@app.route('/mostrarImagemConvertido')
-def mostrar_imagemConvertido():
-    imagem_url = url_for('static', filename='AFDs/automatoConvertido.png')
-    return render_template('imagem.html', caminho=imagem_url)
-"""
 
 @app.route('/minimizar_afd', methods=['GET'])
 def minimizar_afd():
@@ -286,11 +267,46 @@ def mostrar_imagemMinimizado():
     return render_template('imagem.html', caminho=imagem_url)
       
 
+@app.route('/maquina_turing', methods=['GET'])
+def render_maquina_turing():
+    return render_template('mt.html')
 
-@app.route('/maquina_turing', methods=['POST'])
+@app.route('/mt', methods = ['POST'])
 def maquina_turing():
-    mt.maquina_turing()
-    return redirect(url_for('menu'))
+    fita = request.form['fita'].replace(' ', '')
+    simbolosextras = request.form['simbolos_extras'].split(' ')
+    estados = request.form['estados'].split(' ')
+    estado_inicial = request.form['estado_ini']
+    estados_aceitacao = set(('estados_aceitacao').split(' '))
+    transicoes = {}
+
+    for estado in estados:
+        for simbolo in fita:
+            chave_transicao = f'trans_{estado}_{simbolo}'
+            transicao_valor = request.form.get(chave_transicao)
+            if transicao_valor:
+                if transicao_valor != '-':
+                    estado_destino, simbolo_escrever, direcao = transicao_valor.split(' ')
+                    transicoes[(estado, simbolo)] = (estado_destino, simbolo_escrever, direcao)
+
+    if(simbolosextras):
+        for estado in estados:
+            for simbolo in simbolosextras:
+                chave_transicao = f'trans_{estado}_{simbolo}'
+                transicao_valor = request.form.get(chave_transicao)
+                if transicao_valor:
+                    if transicao_valor != '-':
+                        estado_destino, simbolo_escrever, direcao = transicao_valor.split(' ')
+                        transicoes[(estado, simbolo)] = (estado_destino, simbolo_escrever, direcao)
+
+    tm = basemt.MaquinaTuring(fita = fita,
+                              estado_inicial = estado_inicial,
+                              estados_finais = estados_aceitacao,
+                              regras_transicao = transicoes)
+
+    res = tm.retorna_fita()
+
+    return render_template('resultado_turing.html', resultado = res)
 
 
 @app.route('/sair')

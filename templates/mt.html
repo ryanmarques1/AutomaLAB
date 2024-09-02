@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Máquina de Turing</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Máquina de Turing</h1>
+
+        <div class="instrucoes-turing"> <!-- Corrigido o nome da classe -->
+            <p>Instruções: Insira tudo o que está sendo solicitado.</p>
+            <p>Se nas regras para a computação do seu problema houver um símbolo vazio, digite '_'</p>
+            <p>Se na transição não houver ação a se fazer, digite *-*</p>
+            <p>Símbolos extras são símbolos que aparecem nas regras, mas não estão na fita.</p>
+        </div>
+
+        <form action="/mt" method="POST">
+            <div class="form-group">
+                <label for="fita">Informe a fita (separados por espaço):</label>
+                <input type="text" id="fita" name="fita" required>
+            </div>
+            <div class="form-group">
+                <label for="simbolos_extras">Informe os símbolos extras (separado por espaço):</label>
+                <input type="text" id="simbolos_extras" name="simbolos_extras" required> <!-- Corrigido id -->
+            </div>
+            <div class="form-group">
+                <label for="estados">Estados:</label>
+                <input type="text" id="estados" name="estados" required>
+            </div>
+            <div class="form-group">
+                <label for="estado_ini">Estado Inicial:</label>
+                <input type="text" id="estado_ini" name="estado_ini" required>
+            </div>
+            <div class="form-group">
+                <label for="estados_aceitacao">Estados de Aceitação (separados por espaço):</label>
+                <input type="text" id="estados_aceitacao" name="estados_aceitacao" required>
+            </div>
+            <div class="form-group">
+                <h3>Transições</h3>
+                <div id="transicoes-container">
+                    <!-- Este espaço será preenchido dinamicamente com base nos estados e alfabeto -->
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+        <a href="{{ url_for('menu') }}" class="btn btn-secondary">Voltar ao Menu</a>
+    </div>
+    <script>
+        // Listener para campos que devem atualizar as transições
+        document.getElementById('estados').addEventListener('input', updateTransicoes);
+        document.getElementById('fita').addEventListener('input', updateTransicoes);
+        document.getElementById('simbolos_extras').addEventListener('input', updateTransicoes); // Corrigido o id
+
+        function updateTransicoes() {
+            const estados = document.getElementById('estados').value.trim().split(' ').filter(Boolean);
+            const fita = document.getElementById('fita').value.trim().split(' ').filter(Boolean);
+            const simbolos_extras = document.getElementById('simbolos_extras').value.trim().split(' ').filter(Boolean); // Corrigido o id
+            const simbolos = [...new Set([...fita, ...simbolos_extras])];  // Combina fita e símbolos extras
+            const container = document.getElementById('transicoes-container');
+            container.innerHTML = '';
+
+            estados.forEach(estado => {
+                simbolos.forEach(simbolo => {
+                    const label = document.createElement('label');
+                    label.textContent = `Transição de ${estado} com '${simbolo}' se não houver ação, digite '-':`;
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.name = `trans_${estado}_${simbolo}`;  
+                    container.appendChild(label);
+                    container.appendChild(input);
+                    container.appendChild(document.createElement('br'));
+                });
+            });
+        }
+    </script>
+</body>
+</html>

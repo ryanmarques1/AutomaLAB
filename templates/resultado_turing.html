@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resultado - Máquina de Turing</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+   
+    <h1>Resultado - Máquina de Turing</h1>
+    <br><br>
+    
+    <div>
+        <h2>Saída da Máquina de Turing: {{ resultado }}</h2>
+    </div>
+    <br><br>
+    
+    <a href="{{ url_for('menu') }}">Voltar para o Menu Principal</a>
+    
+</body>
+</html>
