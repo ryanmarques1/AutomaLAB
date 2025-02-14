@@ -2,9 +2,9 @@
 Sistema para a criação e utilização de autómatos AFDs e AFNs
 Equipe:
 
-Ryan Marques de Castro - 7572
-Moisés José Ribeiro - 8108
-Otávio Henrique Lopes Resende - 8132
+Ryan Marques de Castro
+Moisés José Ribeiro
+Otávio Henrique Lopes Resende
 
 Requirements
 1.1 Dependências: Para conseguir executar o projeto, primeiro temos que verificar as suas dependências (frameworks ou bibliotecas) usadas.
